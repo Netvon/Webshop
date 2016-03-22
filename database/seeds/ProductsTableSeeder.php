@@ -12,11 +12,6 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('filters')->insert([
-            'name' => 'kleur',
-            'created_at' => Carbon::now()->toDateTimeString(),
-        ]);
-
         DB::table('products')->insert([
             'name' => 'Nintendo 64',
             'price' => '12.34',
