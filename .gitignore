@@ -32,6 +32,7 @@ fabric.properties
 vendor/
 node_modules/
 public/storage
+storage/logs
 
 # Laravel 5 & Lumen specific
 .env
