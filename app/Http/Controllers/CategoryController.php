@@ -13,7 +13,7 @@ class CategoryController extends Controller
 
     public function __construct(CategoryRepository $categories)
     {
-        $this->middleware('admin');
+        $this->middleware('role:admin');
         $this->categories = $categories;
     }
     /**
