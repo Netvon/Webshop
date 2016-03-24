@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use Request;
-
-use App\Http\Requests;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -45,29 +43,39 @@ class CategoryController extends Controller
         return view('category.create');
     }
 
-    public function store()
+    public function store(CategoryRequest $request)
     {
         $this->middleware('role:admin');
 
-        $input = Request::all();
+        $input = $request->all();
 
-        $category = Category::create($input);
+        Category::create($input);
 
         return redirect('categories');
     }
 
-    public function update()
+    public function update($id, CategoryRequest $request)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        $category->update($request->all());
+
+        return redirect('categories');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('category.edit', [
+            'category' => $category,
+        ]);
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return redirect('categories');
     }
 }

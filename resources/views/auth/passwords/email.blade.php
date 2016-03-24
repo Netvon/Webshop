@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['page_title' => 'Email'])
 
 <!-- Main Content -->
 @section('content')

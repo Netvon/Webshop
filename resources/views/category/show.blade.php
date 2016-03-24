@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['page_title' => 'Category test'])
 
 @section('content')
     <h2>{{$category->name}}</h2>
