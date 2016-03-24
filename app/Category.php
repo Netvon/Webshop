@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -27,7 +28,7 @@ class Category extends Model
 
     public function parent()
     {
-        $this->belongsTo(Category::class, 'parent_id', 'id');
+        return $this->belongsTo(Category::class, 'parent_id', 'id');
     }
 
     public function children()
@@ -38,5 +39,13 @@ class Category extends Model
     public function products()
     {
         return $this->hasMany(Product::class, 'category_id');
+    }
+
+    /**
+     * @param $query Builder
+     */
+    public function scopeRoots($query)
+    {
+        $query->where('parent_id', null);
     }
 }

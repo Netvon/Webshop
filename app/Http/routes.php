@@ -34,5 +34,7 @@ Route::group(['middleware' => 'web'], function () {
     });
 
     Route::get('/home', 'HomeController@index');
-    Route::get('/browse', 'CategoryController@index');
+//    Route::get('/categories', 'CategoryController@index');
+
+    Route::resource('categories', 'CategoryController');
 });

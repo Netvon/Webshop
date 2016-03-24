@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Category;
+use Request;
 
 use App\Http\Requests;
-use App\Repositories\CategoryRepository;
 
 class CategoryController extends Controller
 {
-    protected $categories;
-
-    public function __construct(CategoryRepository $categories)
+    public function __construct()
     {
-        $this->middleware('role:admin');
-        $this->categories = $categories;
+        $this->middleware('role:admin', ['except' => [
+            'index',
+            'show',
+        ]]);
     }
     /**
      * Show the application dashboard.
@@ -23,8 +23,51 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('browse', [
-            'categories' => $this->categories->all(),
+        return view('category.index', [
+            'categories' => Category::roots()->get(),
         ]);
+    }
+
+    public function show($id)
+    {
+        $category = Category::findOrFail($id);
+
+        return view('category.show', [
+            'category' => $category,
+            'products' => $category->products()->get(),
+        ]);
+    }
+
+    public function create()
+    {
+        $this->middleware('role:admin');
+
+        return view('category.create');
+    }
+
+    public function store()
+    {
+        $this->middleware('role:admin');
+
+        $input = Request::all();
+
+        $category = Category::create($input);
+
+        return redirect('categories');
+    }
+
+    public function update()
+    {
+        //
+    }
+
+    public function edit()
+    {
+        //
+    }
+
+    public function destroy()
+    {
+        //
     }
 }
