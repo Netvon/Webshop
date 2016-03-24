@@ -21,18 +21,22 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $cats = Category::with('children.children')->where('parent_id', null)->get();
+
         return view('category.index', [
-            'categories' => Category::roots()->get(),
+            'categories' => $cats,
         ]);
     }
 
     public function show($id)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::findBySlugOrIdOrFail($id);
+
+        $products = $category->products()->get();
 
         return view('category.show', [
             'category' => $category,
-            'products' => $category->products()->get(),
+            'products' => $products,
         ]);
     }
 
@@ -56,7 +60,7 @@ class CategoryController extends Controller
 
     public function update($id, CategoryRequest $request)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::findBySlugOrIdOrFail($id);
 
         $category->update($request->all());
 
@@ -65,7 +69,7 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::findBySlugOrIdOrFail($id);
         return view('category.edit', [
             'category' => $category,
         ]);
@@ -73,7 +77,7 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::findBySlugOrIdOrFail($id);
         $category->delete();
 
         return redirect('categories');

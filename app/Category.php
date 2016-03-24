@@ -2,13 +2,21 @@
 
 namespace App;
 
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Category extends Model implements SluggableInterface
 {
     use SoftDeletes;
+    use SluggableTrait;
+
+    protected $sluggable = [
+        'build_from' => 'name',
+        'save_to'    => 'slug'
+    ];
 
     /**
      * The attributes that should be mutated to dates.

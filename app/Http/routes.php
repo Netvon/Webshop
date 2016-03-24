@@ -37,4 +37,5 @@ Route::group(['middleware' => 'web'], function () {
 //    Route::get('/categories', 'CategoryController@index');
 
     Route::resource('categories', 'CategoryController');
+    Route::resource('products', 'ProductController', ['except' => 'index']);
 });
