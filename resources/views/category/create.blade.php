@@ -1,10 +1,8 @@
-@extends('layouts.app', ['page_title' => 'Category test'])
+@extends('layouts.app', ['page_title' => trans('category.create_title')])
 
 @section('content')
-    <h2>Create new Category</h2>
+    <h2>{{ trans('category.create_title') }}</h2>
     {!! Form::open(['url' => 'categories']) !!}
-        @include('category.partials._form', ['submitButtonText' => 'Add Category'])
+        @include('category.partials._form', ['submitButtonText' => trans('category.create_action')])
     {!! Form::close() !!}
-
-    @include('errors.list');
 @endsection

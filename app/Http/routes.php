@@ -38,4 +38,6 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController', ['except' => 'index']);
+
+    Route::get('manage', 'ManageController@index');
 });

@@ -1,15 +1,14 @@
-@extends('layouts.app', ['page_title' => 'Category test'])
+@extends('layouts.app', ['page_title' => trans('category.edit_title')])
 
 @section('content')
-    <h2>Edit Category: {{$category->name}}</h2>
+    <h2>{{ trans('category.edit_title') }}</h2>
     {!! Form::model($category, ['method' => 'PATCH', 'action' => ['CategoryController@update', $category->id]]) !!}
-        @include('category.partials._form', ['submitButtonText' => 'Edit Category'])
+        @include('category.partials._form', ['submitButtonText' => trans('category.edit_action')])
     {!! Form::close() !!}
 
     {!! Form::model($category, ['method' => 'DELETE', 'action' => ['CategoryController@destroy', $category->id]]) !!}
         <div class="form-group">
-            {!! Form::submit('Delete Category', ['class' => 'btn btn-primary form-control']) !!}
+            {!! Form::submit(trans('category.delete_action'), ['class' => 'btn btn-primary form-control']) !!}
         </div>
-    {!! Form::close() !!}}
-    @include('errors.list');
+    {!! Form::close() !!}
 @endsection
