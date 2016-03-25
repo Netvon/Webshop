@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'object_name'   => 'Categorie',
     'name'          => 'Categorie naam',
     'description'   => 'Beschrijving',
     'create_title'  => 'Categorie aanmaken',

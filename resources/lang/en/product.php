@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'object_name'       => 'Product',
     'name'              => 'Product name',
     'price'             => 'Price',
     'is_in_stock'       => 'In stock',
