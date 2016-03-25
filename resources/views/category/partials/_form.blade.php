@@ -9,5 +9,12 @@
     @include('errors.block', ['field_name' => 'description'])
 </div>
 <div class="form-group">
+    <select class="form-control" name="parent">
+    @foreach(\App\Category::all() as $parent)
+        <option value="{{ $parent->id }}">{{ $parent->name }}</option>
+    @endforeach
+    </select>
+</div>
+<div class="form-group">
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 </div>

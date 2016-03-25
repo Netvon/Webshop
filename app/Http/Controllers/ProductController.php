@@ -19,7 +19,16 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::findBySlugOrIdOrFail($id);
+        $products = Product::with('filters', 'specifications')
+                    ->get();
+
+        $product = null;
+
+        foreach($products as $p)
+        {
+            if($p->id == $id || $p->slug == $id)
+                $product = $p;
+        }
 
         return view('product.show', [
             'product' => $product,

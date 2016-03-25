@@ -43,11 +43,6 @@ class Product extends Model implements SluggableInterface
         $this->belongsTo(Category::class);
     }
 
-    public function order_price()
-    {
-        return $this->pivot->quantity * $this->price;
-    }
-
     public function orders()
     {
         return $this->belongsToMany(Order::class)

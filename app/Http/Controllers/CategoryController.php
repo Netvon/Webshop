@@ -42,18 +42,17 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $this->middleware('role:admin');
-
         return view('category.create');
     }
 
     public function store(CategoryRequest $request)
     {
-        $this->middleware('role:admin');
-
         $input = $request->all();
 
-        Category::create($input);
+        $category = Category::create($input);
+
+        $category->parent()->associate(Category::find($input['parent']));
+        $category->save();
 
         return redirect('categories');
     }
