@@ -12,7 +12,7 @@
             <div class="panel-body">
 
                 <div class="btn-group" role="group" aria-label="...">
-                    <a class="btn btn-default" href="{{ URL::action('ProductController@create') }}">Add Product</a>
+                    <a class="btn btn-default" href="{{ URL::action('ProductController@create_in_category', $category->slug) }}">Add Product</a>
                     <a class="btn btn-default" href="{{ URL::action('CategoryController@edit', $category->id) }}">Edit Category</a>
                 </div>
 
@@ -21,6 +21,7 @@
     @endif
 
     @if(!is_null($category->children))
+        @if(count($category->children()->get()) > 0)
         <h3>Sub Categories</h3>
 
         <div class="list-group">
@@ -32,6 +33,7 @@
                 </a>
             @endforeach
         </div>
+        @endif
     @endif
 
     @if($products->count() > 0)

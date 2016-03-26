@@ -3,6 +3,19 @@
     {!! Form::text('name', null, ['class' => 'form-control']) !!}
     @include('errors.block', ['field_name' => 'name'])
 </div>
+<div class="form-group">
+    {!! Form::label('category_id', trans('product.category')) !!}
+    @if(!$create_in_category)
+    <select class="form-control" name="category_id">
+        @foreach(\App\Category::all() as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+        @endforeach
+    </select>
+    @else
+        <div class="form-control" readonly>{{ $create_in_category->name }}</div>
+        {!! Form::hidden('category_id', $create_in_category->id) !!}
+    @endif
+</div>
 <div class="form-group{{ $errors->has('description_short') ? ' has-error' : '' }}">
     {!! Form::label('description_short', trans('product.description_short')) !!}
     {!! Form::text('description_short', null, ['class' => 'form-control']) !!}

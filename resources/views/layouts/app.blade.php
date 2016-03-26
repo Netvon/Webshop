@@ -92,6 +92,7 @@
     </nav>
 
     <div class="container">
+        @include("notification.partials._flash")
         @yield('content')
     </div>
 

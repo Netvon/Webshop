@@ -36,6 +36,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', 'HomeController@index');
 //    Route::get('/categories', 'CategoryController@index');
 
+    Route::get('products/create/in-category/{id}', 'ProductController@create_in_category');
+
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController', ['except' => 'index']);
 
