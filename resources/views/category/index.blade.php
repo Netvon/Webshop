@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page_title' => 'Category test'])
+@extends('layouts.app', ['page_title' => trans('category.index_title')])
 
 @section('content')
     <div class="page-header">
