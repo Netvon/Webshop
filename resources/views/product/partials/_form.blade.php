@@ -55,5 +55,20 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('image[]', 'Choose an image') !!}
+    {!! Form::file('image[]', ['multiple', 'class' => 'form-control']) !!}
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Filters</div>
+    <p class="panel-body">
+        <a class="btn btn-default" id="product-spec-add">Voeg toe</a>
+    </p>
+    <ul class="list-group" id="product-spec-list">
+
+    </ul>
+</div>
+
+<div class="form-group">
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 </div>

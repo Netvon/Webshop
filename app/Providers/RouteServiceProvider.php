@@ -32,7 +32,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $router->bind('products', function($idOrSlug)
         {
-            $products = Product::with('filters', 'specifications', 'category')
+            $products = Product::with('filters', 'specifications', 'category', 'images')
                 ->get();
 
             $product = null;

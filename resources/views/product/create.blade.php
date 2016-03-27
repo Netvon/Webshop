@@ -6,7 +6,7 @@
     @else
         <h2>{{ trans('product.create_title_category', ['name' => $create_in_category->name]) }}</h2>
     @endif
-    {!! Form::open(['url' => 'products']) !!}
+    {!! Form::open(['url' => 'products', 'files' => true]) !!}
 
     @include('product.partials._form', ['submitButtonText' => trans('product.create_action')])
     {!! Form::close() !!}
