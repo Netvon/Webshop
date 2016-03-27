@@ -39,3 +39,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController', ['except' => 'index']);
 });
+
+// ARROW
+Route::get('/arrow', 'ArrowController@index');
