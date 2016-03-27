@@ -28,6 +28,8 @@ class ProductRequest extends Request
             'price' => 'required|numeric',
             'description_long' => 'required',
             'description_short' => 'required',
+            'spec.*.name' => 'required',
+            'spec.*.value' => 'required',
         ];
     }
 }

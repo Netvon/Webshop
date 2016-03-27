@@ -7,6 +7,7 @@ use App\Http\Requests\ProductRequest;
 use App\Product;
 
 use App\Http\Requests;
+use App\Specification;
 use Redirect;
 use Request;
 
@@ -21,15 +22,18 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $products = Product::with('filters', 'specifications')
-                    ->get();
+        $products = Product::with('filters', 'specifications', 'category')
+            ->get();
 
         $product = null;
 
-        foreach($products as $p)
-        {
-            if($p->id == $id || $p->slug == $id)
+        foreach ($products as $p) {
+            if ($p->id == $id || $p->slug == $id)
                 $product = $p;
+        }
+
+        if (!$product) {
+            abort(404);
         }
 
         return view('product.show', [
@@ -44,7 +48,8 @@ class ProductController extends Controller
 
     public function create_in_category($id)
     {
-        $create_in_category =  Category::findBySlugOrIdOrFail($id);
+
+        $create_in_category = Category::findBySlugOrIdOrFail($id);
 
         return view('product.create', ['create_in_category' => $create_in_category]);
     }
@@ -55,6 +60,13 @@ class ProductController extends Controller
 
         $product = Product::create($input);
 
+        foreach ($input['spec'] as $spec) {
+            $new_spec = new Specification();
+            $new_spec->name = $spec['name'];
+            $new_spec->value = $spec['value'];
+            $product->specifications()->save($new_spec);
+        }
+
         flash(trans('product.flash_created', ['name' => $product->name]), 'success');
 
         return redirect('/');
@@ -62,7 +74,21 @@ class ProductController extends Controller
 
     public function update($id, ProductRequest $request)
     {
-        $product = Product::findBySlugOrIdOrFail($id);
+        $products = Product::with('specifications')
+            ->get();
+
+        $product = null;
+
+        foreach ($products as $p) {
+            if ($p->id == $id || $p->slug == $id)
+                $product = $p;
+        }
+
+        if (!$product) {
+            abort(404);
+        }
+
+        dd($request['spec'], $product->specifications()->toArray('name', 'value'));
 
         $product->update($request->all());
 
@@ -71,9 +97,23 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = Product::findBySlugOrIdOrFail($id);
+        $products = Product::with('filters', 'specifications', 'category')
+            ->get();
+
+        $product = null;
+
+        foreach ($products as $p) {
+            if ($p->id == $id || $p->slug == $id)
+                $product = $p;
+        }
+
+        if (!$product) {
+            abort(404);
+        }
+
         return view('product.edit', [
-            'product' => $product,
+            'product'            => $product,
+            'create_in_category' => $product->category,
         ]);
     }
 

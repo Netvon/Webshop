@@ -12,7 +12,7 @@ class Specification extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'value', 'product_id',
+        'name', 'value',
     ];
 
     public function product()

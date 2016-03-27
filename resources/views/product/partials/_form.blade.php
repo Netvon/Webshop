@@ -35,6 +35,25 @@
     {!! Form::label('is_in_stock', trans('product.is_in_stock')) !!}
     {!! Form::checkbox('is_in_stock', null, ['class' => 'form-control']) !!}
 </div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Specificaties</div>
+    <p class="panel-body">
+        <a class="btn btn-default" id="product-spec-add">Voeg toe</a>
+    </p>
+    <ul class="list-group" id="product-spec-list">
+        @if(old('spec'))
+            @foreach(old('spec') as $key => $spec)
+                @include('product.partials._spec', ['spec_id' => $key, 'spec_name' => $spec['name'], 'spec_val' => $spec['value']])
+            @endforeach
+        @elseif(!empty($product) && count($product->specifications) > 0)
+            @foreach($product->specifications as $key => $spec)
+                @include('product.partials._spec', ['spec_id' => $key, 'spec_name' => $spec['name'], 'spec_val' => $spec['value']])
+            @endforeach
+        @endif
+    </ul>
+</div>
+
 <div class="form-group">
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 </div>
