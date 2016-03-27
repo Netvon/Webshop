@@ -7,7 +7,7 @@
     <meta name="googlebot" content="index,follow,snippet,archive">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{$page_title}}</title>
+    <title>{{ $page_title }}</title>
 
     <meta name="keywords" content="">
 
@@ -58,11 +58,13 @@
 
 <body>
 
-    @include('arrow.header')
+    <div id="all">
+        @include('arrow.header')
 
-    @yield('content')
+        @yield('content')
 
-    @include('arrow.footer')
+        @include('arrow.footer')
+    </div>
 
 </body>
 
