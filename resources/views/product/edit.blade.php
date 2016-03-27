@@ -14,7 +14,12 @@
             $('#product-spec-add').click(function(){
                 var specList = $('#product-spec-list');
 
-                var newSpecid = $('#product-spec-list .list-group-item:last-child').data('specid') + 1;
+                var newSpecid = 0;
+
+                console.log($('#product-spec-list .list-group-item:last-child'));
+
+                if($('#product-spec-list .list-group-item:last-child').length > 0)
+                    newSpecid = $('#product-spec-list .list-group-item:last-child').data('specid') + 1;
 
                 $('<li class="list-group-item" data-specid="'+newSpecid+'">' +
                         '<div class="row">' +

@@ -59,10 +59,18 @@ class ProductController extends Controller
 
     public function update(Product $product, ProductRequest $request)
     {
-        dd($request['spec'], $product->specifications()->toArray('name', 'value'));
-
+//        dd($request['spec'], $product->specifications->toArray());
+//        dd($request->all());
         $product->update($request->all());
 
+//        dd($request['spec']);
+
+        foreach ($request['spec'] as $key => $spec) {
+            $new_spec = Specification::firstOrNew(['id' => $key]);
+            $new_spec->name = $spec['name'];
+            $new_spec->value = $spec['value'];
+            $product->specifications()->save($new_spec);
+        }
         return Redirect::action('ProductController@show', $product->slug);
     }
 

@@ -48,7 +48,7 @@
             @endforeach
         @elseif(!empty($product) && count($product->specifications) > 0)
             @foreach($product->specifications as $key => $spec)
-                @include('product.partials._spec', ['spec_id' => $key, 'spec_name' => $spec['name'], 'spec_val' => $spec['value']])
+                @include('product.partials._spec', ['spec_id' => $spec['id'], 'spec_name' => $spec['name'], 'spec_val' => $spec['value']])
             @endforeach
         @endif
     </ul>
