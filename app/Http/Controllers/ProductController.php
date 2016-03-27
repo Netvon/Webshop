@@ -20,25 +20,13 @@ class ProductController extends Controller
         ]]);
     }
 
-    public function show($id)
+    /**
+     * @param Product $product
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(Product $product)
     {
-        $products = Product::with('filters', 'specifications', 'category')
-            ->get();
-
-        $product = null;
-
-        foreach ($products as $p) {
-            if ($p->id == $id || $p->slug == $id)
-                $product = $p;
-        }
-
-        if (!$product) {
-            abort(404);
-        }
-
-        return view('product.show', [
-            'product' => $product,
-        ]);
+        return view('product.show', compact('product'));
     }
 
     public function create()
@@ -46,12 +34,9 @@ class ProductController extends Controller
         return view('product.create', ['create_in_category' => null]);
     }
 
-    public function create_in_category($id)
+    public function create_in_category(Category $create_in_category)
     {
-
-        $create_in_category = Category::findBySlugOrIdOrFail($id);
-
-        return view('product.create', ['create_in_category' => $create_in_category]);
+        return view('product.create', compact('create_in_category'));
     }
 
     public function store(ProductRequest $request)
@@ -72,22 +57,8 @@ class ProductController extends Controller
         return redirect('/');
     }
 
-    public function update($id, ProductRequest $request)
+    public function update(Product $product, ProductRequest $request)
     {
-        $products = Product::with('specifications')
-            ->get();
-
-        $product = null;
-
-        foreach ($products as $p) {
-            if ($p->id == $id || $p->slug == $id)
-                $product = $p;
-        }
-
-        if (!$product) {
-            abort(404);
-        }
-
         dd($request['spec'], $product->specifications()->toArray('name', 'value'));
 
         $product->update($request->all());
@@ -95,22 +66,8 @@ class ProductController extends Controller
         return Redirect::action('ProductController@show', $product->slug);
     }
 
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $products = Product::with('filters', 'specifications', 'category')
-            ->get();
-
-        $product = null;
-
-        foreach ($products as $p) {
-            if ($p->id == $id || $p->slug == $id)
-                $product = $p;
-        }
-
-        if (!$product) {
-            abort(404);
-        }
-
         return view('product.edit', [
             'product'            => $product,
             'create_in_category' => $product->category,

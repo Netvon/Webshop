@@ -28,10 +28,8 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show(Category $category)
     {
-        $category = Category::findBySlugOrIdOrFail($id);
-
         $products = $category->products()->get();
 
         return view('category.show', [
@@ -57,26 +55,20 @@ class CategoryController extends Controller
         return redirect('categories');
     }
 
-    public function update($id, CategoryRequest $request)
+    public function update(Category $category, CategoryRequest $request)
     {
-        $category = Category::findBySlugOrIdOrFail($id);
-
         $category->update($request->all());
 
         return redirect('categories');
     }
 
-    public function edit($id)
+    public function edit(Category $category)
     {
-        $category = Category::findBySlugOrIdOrFail($id);
-        return view('category.edit', [
-            'category' => $category,
-        ]);
+        return view('category.edit', compact('category'));
     }
 
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        $category = Category::findBySlugOrIdOrFail($id);
         $category->delete();
 
         return redirect('categories');

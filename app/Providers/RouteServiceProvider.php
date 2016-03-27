@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Category;
+use App\Product;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -27,6 +29,30 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot($router);
+
+        $router->bind('products', function($idOrSlug)
+        {
+            $products = Product::with('filters', 'specifications', 'category')
+                ->get();
+
+            $product = null;
+
+            foreach ($products as $p) {
+                if ($p->id == $idOrSlug || $p->slug == $idOrSlug)
+                    $product = $p;
+            }
+
+            if (!$product) {
+                abort(404);
+            }
+
+            return $product;
+        });
+
+        $router->bind('categories', function($idOrSlug)
+        {
+            return Category::findBySlugOrIdOrFail($idOrSlug);
+        });
     }
 
     /**
