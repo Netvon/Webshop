@@ -33,20 +33,20 @@ Route::group(['middleware' => 'web'], function () {
         return view('welcome');
     });
 
-    Route::get('/home', 'HomeController@index');
-//    Route::get('/categories', 'CategoryController@index');
+    Route::get('home', 'HomeController@index');
 
 
     Route::get('cart', 'CartController@index');
 
-    Route::group(['prefix' => 'manage'], function(){
+    Route::group(['prefix' => 'manage', 'middleware' => 'role:admin'], function(){
 
         Route::get('products/create/in-category/{categories}', 'Manage\ProductController@create_in_category');
 
         Route::resource('categories', 'Manage\CategoryController');
         Route::resource('products', 'Manage\ProductController');
         Route::resource('tags', 'Manage\TagController');
+        Route::patch('tags/restore/{trashedtags}', 'Manage\TagController@restore');
     });
 
-    Route::get('manage', 'ManageController@index');
+    Route::get('manage', 'Manage\ManageController@index');
 });

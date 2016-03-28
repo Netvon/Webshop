@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Category;
 use App\Product;
+use App\Tag;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -52,6 +53,29 @@ class RouteServiceProvider extends ServiceProvider
         $router->bind('categories', function($idOrSlug)
         {
             return Category::findBySlugOrIdOrFail($idOrSlug);
+        });
+
+        $router->bind('tags', function($idOrSlug)
+        {
+            return Tag::findBySlugOrIdOrFail($idOrSlug);
+        });
+
+        $router->bind('trashedtags', function($idOrSlug)
+        {
+            $tags = Tag::withTrashed()->get();
+
+            $tag = null;
+
+            foreach ($tags as $t) {
+                if ($t->id == $idOrSlug || $t->slug == $idOrSlug)
+                    $tag = $t;
+            }
+
+            if (!$tag) {
+                abort(404);
+            }
+
+            return $tag;
         });
     }
 

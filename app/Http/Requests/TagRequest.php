@@ -13,7 +13,8 @@ class TagRequest extends Request
      */
     public function authorize()
     {
-        return auth_has_role('admin');
+        return true;
+//        return auth_has_role('admin');
     }
 
     /**
@@ -24,7 +25,7 @@ class TagRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|min:3|unique:tags',
+            'name' => 'required|min:2|unique:tags',
         ];
     }
 }

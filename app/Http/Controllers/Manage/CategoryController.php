@@ -8,13 +8,6 @@ use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('role:admin', ['except' => [
-            'index',
-            'show',
-        ]]);
-    }
     /**
      * Show the application dashboard.
      *

@@ -4,20 +4,13 @@ namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TagRequest;
+use App\Tag;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
 class TagController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('role:admin', ['except' => [
-            'index',
-            'show',
-        ]]);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +18,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        return view('manage.tag.index');
     }
 
     /**
@@ -35,7 +28,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('manage.tag.create');
     }
 
     /**
@@ -46,51 +39,73 @@ class TagController extends Controller
      */
     public function store(TagRequest $request)
     {
-        //
+        $tag = Tag::create($request->all());
+
+        flash(trans('tag.flash_created', ['name' => $tag->name]), 'success');
+
+        return redirect()->action('Manage\TagController@index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Tag $tag
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function show($id)
+    public function show(Tag $tag)
     {
-        //
+        return $tag;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Tag $tag
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function edit($id)
+    public function edit(Tag $tag)
     {
-        //
+        return view('manage.tag.edit', compact('tag'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param TagRequest|Request $request
-     * @param  int $id
+     * @param Tag $tag
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function update(TagRequest $request, $id)
+    public function update(TagRequest $request, Tag $tag)
     {
-        //
+        if($tag->update($request->all())) {
+            $tag->resluggify();
+            $tag->save();
+        }
+
+        return redirect()->action('Manage\TagController@index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Tag $tag
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function destroy($id)
+    public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+
+        return redirect()->action('Manage\TagController@index');
+    }
+
+    public function restore(Tag $tag)
+    {
+        $tag->restore();
+
+        return redirect()->action('Manage\TagController@index');
     }
 }
