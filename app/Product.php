@@ -14,7 +14,7 @@ class Product extends Model implements SluggableInterface
 
     protected $sluggable = [
         'build_from' => 'name',
-        'save_to'    => 'slug'
+        'save_to'    => 'slug',
     ];
 
     /**
@@ -30,22 +30,12 @@ class Product extends Model implements SluggableInterface
      * @var array
      */
     protected $fillable = [
-        'name', 'price', 'description_long', 'description_short',
+        'name', 'price', 'description_long', 'description_short', 'is_in_stock', 'category_id',
     ];
 
-    public function productImages()
+    public function category()
     {
-        return $this->hasMany(ProductImage::class);
-    }
-
-    public function parent()
-    {
-        $this->belongsTo(Category::class);
-    }
-
-    public function order_price()
-    {
-        return $this->pivot->quantity * $this->price;
+        return $this->belongsTo(Category::class);
     }
 
     public function orders()
@@ -55,16 +45,25 @@ class Product extends Model implements SluggableInterface
             ->withTimestamps();
     }
 
-    public function filters()
+    public function tags()
     {
-        return $this->belongsToMany(Filter::class)
-            ->withPivot('value')
+        return $this->belongsToMany(Tag::class)
             ->withTimestamps();
+    }
+
+    public function getTagListAttribute()
+    {
+        return $this->tags->pluck('id')->toArray();
     }
 
     public function specifications()
     {
         return $this->hasMany(Specification::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
     }
 
 }

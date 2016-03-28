@@ -13,7 +13,7 @@ class ProductRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        return auth_has_role('admin');
     }
 
     /**
@@ -28,6 +28,8 @@ class ProductRequest extends Request
             'price' => 'required|numeric',
             'description_long' => 'required',
             'description_short' => 'required',
+            'spec.*.name' => 'required',
+            'spec.*.value' => 'required',
         ];
     }
 }

@@ -13,7 +13,7 @@ class CategoryRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        return auth_has_role('admin');
     }
 
     /**
@@ -24,7 +24,7 @@ class CategoryRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|min:3',
+            'name' => 'required|min:3|unique:categories',
             'description' => 'required',
         ];
     }

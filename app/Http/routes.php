@@ -36,8 +36,19 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', 'HomeController@index');
 //    Route::get('/categories', 'CategoryController@index');
 
-    Route::resource('categories', 'CategoryController');
-    Route::resource('products', 'ProductController', ['except' => 'index']);
+
+    Route::get('cart', 'CartController@index');
+
+    Route::group(['prefix' => 'manage'], function(){
+
+        Route::get('products/create/in-category/{categories}', 'Manage\ProductController@create_in_category');
+
+        Route::resource('categories', 'Manage\CategoryController');
+        Route::resource('products', 'Manage\ProductController');
+        Route::resource('tags', 'Manage\TagController');
+    });
+
+    Route::get('manage', 'ManageController@index');
 });
 
 // ARROW
