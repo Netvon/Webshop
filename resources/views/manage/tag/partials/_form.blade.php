@@ -1,7 +1,7 @@
-<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+<div class="input-group{{ $errors->has('name') ? ' has-error' : '' }}">
     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => trans('tag.name')]) !!}
-    @include('errors.block', ['field_name' => 'name'])
+    <span class="input-group-btn">
+        {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
+    </span>
 </div>
-<div class="form-group">
-    {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
-</div>
+@include('errors.block', ['field_name' => 'name'])

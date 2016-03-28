@@ -41,11 +41,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['prefix' => 'manage', 'middleware' => 'role:admin'], function(){
 
         Route::get('products/create/in-category/{categories}', 'Manage\ProductController@create_in_category');
+        Route::get('categories/create/in-category/{categories}', 'Manage\CategoryController@create_in_category');
 
         Route::resource('categories', 'Manage\CategoryController');
         Route::resource('products', 'Manage\ProductController');
-        Route::resource('tags', 'Manage\TagController');
+        Route::resource('tags', 'Manage\TagController', ['except' => 'create']);
         Route::patch('tags/restore/{trashedtags}', 'Manage\TagController@restore');
+        Route::patch('categories/restore/{trashedcategories}', 'Manage\CategoryController@restore');
     });
 
     Route::get('manage', 'Manage\ManageController@index');

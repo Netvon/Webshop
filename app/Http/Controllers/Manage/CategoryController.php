@@ -15,8 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-
-        $cats = Category::with('children.children')->where('parent_id', null)->get();
+        $cats = Category::with('children.children')->withTrashed()->where('parent_id', null)->get();
 
         return view('manage.category.index', [
             'categories' => $cats,
@@ -36,6 +35,11 @@ class CategoryController extends Controller
     public function create()
     {
         return view('manage.category.create');
+    }
+
+    public function create_in_category(Category $create_in_category)
+    {
+        return view('manage.category.create', compact('create_in_category'));
     }
 
     public function store(CategoryRequest $request)
@@ -66,6 +70,13 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return redirect('categories');
+        return redirect()->action('Manage\CategoryController@index');
+    }
+
+    public function restore(Category $category)
+    {
+        $category->restore();
+
+        return redirect()->action('Manage\CategoryController@index');
     }
 }

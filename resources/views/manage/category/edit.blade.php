@@ -1,7 +1,7 @@
-@extends('layouts.app', ['page_title' => trans('category.edit_title')])
+@extends('layouts.arrow_page', ['page_title' => trans('category.edit_title')])
+@section('page_content')
 
-@section('content')
-    <h2>{{ trans('category.edit_title') }}</h2>
+{{--    <h2>{{ trans('category.edit_title') }}</h2>--}}
     {!! Form::model($category, ['method' => 'PATCH', 'action' => ['Manage\CategoryController@update', $category->id]]) !!}
         @include('manage.category.partials._form', ['submitButtonText' => trans('category.edit_action')])
     {!! Form::close() !!}

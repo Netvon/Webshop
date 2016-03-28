@@ -77,6 +77,24 @@ class RouteServiceProvider extends ServiceProvider
 
             return $tag;
         });
+
+        $router->bind('trashedcategories', function($idOrSlug)
+        {
+            $categories = Category::withTrashed()->get();
+
+            $category = null;
+
+            foreach ($categories as $c) {
+                if ($c->id == $idOrSlug || $c->slug == $idOrSlug)
+                    $category = $c;
+            }
+
+            if (!$category) {
+                abort(404);
+            }
+
+            return $category;
+        });
     }
 
     /**

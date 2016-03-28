@@ -14,8 +14,13 @@ _________________________________________________________ -->
                 </div>
                 <div class="col-xs-7">
                     <div class="login">
-                        <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span
-                                    class="hidden-xs text-uppercase">Sign in</span></a>
+                        @if (Auth::guest())
+                            <a href="#" data-toggle="modal" data-target="#login-modal"><i
+                                        class="fa fa-sign-in"></i> <span
+                                        class="hidden-xs text-uppercase">Sign in</span></a>
+                        @else
+                            <a href="{{ URL::action('Auth\AuthController@logout') }}">{{ Auth::user()->name }}</a>
+                        @endif
                     </div>
 
                 </div>
@@ -37,7 +42,8 @@ _________________________________________________________ -->
 
                     <a class="navbar-brand home" href="app.blade.php">
                         <img src="{{ asset('img/logo.png') }}" alt="Arrow logo" class="logo, hidden-xs hidden-sm">
-                        <img src="{{ asset('img/logo-small.png') }}" alt="Arrow logo" class="visible-xs visible-sm"><span
+                        <img src="{{ asset('img/logo-small.png') }}" alt="Arrow logo"
+                             class="visible-xs visible-sm"><span
                                 class="sr-only">Arrow - Go to homepage</span>
                     </a>
                     <div class="navbar-buttons">
@@ -55,20 +61,20 @@ _________________________________________________________ -->
                     <ul class="nav navbar-nav navbar-right">
                         <li @if ($nav_link === '/arrow')
                             class="dropdown active"
-                            @endif
-                            >
+                                @endif
+                        >
                             <a href="/arrow">Home</a>
                         </li>
                         <li @if ($nav_link === '/shop')
                             class="dropdown active"
-                            @endif
+                                @endif
                         >
                             <a href="/arrow/shop">Shop</a>
                         </li>
                         <li
-                            @if ($nav_link === '/categories')
+                                @if ($nav_link === '/categories')
                                 class="dropdown active"
-                            @endif
+                                @endif
                         >
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b
                                         class="caret"></b></a>
@@ -103,16 +109,16 @@ _________________________________________________________ -->
 
                         <!-- ========== FULL WIDTH MEGAMENU END ================== -->
                         <li
-                            @if ($nav_link === '/about')
-                            class="dropdown active"
-                            @endif
+                                @if ($nav_link === '/about')
+                                class="dropdown active"
+                                @endif
                         >
                             <a href="#">About us</a>
                         </li>
                         <li
-                            @if ($nav_link === '/contact')
-                            class="dropdown active"
-                            @endif
+                                @if ($nav_link === '/contact')
+                                class="dropdown active"
+                                @endif
                         >
                             <a href="#">Contact</a>
                         </li>
