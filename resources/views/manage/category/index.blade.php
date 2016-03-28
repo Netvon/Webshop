@@ -5,11 +5,11 @@
         <h2>{{ trans('category.index_title') }}</h2>
     </div>
 
-    @if(auth()->check() && auth()->user()->role === 'admin')
+    @if(auth_has_role('admin'))
     <div class="panel panel-default">
         <div class="panel-heading">Admin Tools</div>
         <div class="panel-body">
-            <a class="btn btn-primary" href="{{ URL::action('CategoryController@create') }}">{{ trans('category.create_title') }}</a>
+            <a class="btn btn-primary" href="{{ URL::action('Manage\CategoryController@create') }}">{{ trans('category.create_title') }}</a>
         </div>
     </div>
     @endif
@@ -17,7 +17,7 @@
     <div class="list-group">
         @foreach($categories as $category)
         <a class="list-group-item"
-           href="{{URL::action('CategoryController@show', $category->slug)}}" >
+           href="{{URL::action('Manage\CategoryController@show', $category->slug)}}" >
             <h4 class="list-group-item-heading">{{$category->name}}</h4>
             <p class="list-group-item-text">{{$category->description}}</p>
             <ul>

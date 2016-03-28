@@ -13,7 +13,7 @@ class ProductRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        return auth_has_role('admin');
     }
 
     /**

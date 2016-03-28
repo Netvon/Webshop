@@ -33,11 +33,6 @@ class Product extends Model implements SluggableInterface
         'name', 'price', 'description_long', 'description_short', 'is_in_stock', 'category_id',
     ];
 
-    public function productImages()
-    {
-        return $this->hasMany(ProductImage::class);
-    }
-
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -50,11 +45,15 @@ class Product extends Model implements SluggableInterface
             ->withTimestamps();
     }
 
-    public function filters()
+    public function tags()
     {
-        return $this->belongsToMany(Filter::class)
-            ->withPivot('value')
+        return $this->belongsToMany(Tag::class)
             ->withTimestamps();
+    }
+
+    public function getTagListAttribute()
+    {
+        return $this->tags->pluck('id')->toArray();
     }
 
     public function specifications()

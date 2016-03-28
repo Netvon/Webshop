@@ -34,16 +34,31 @@ class Category extends Model implements SluggableInterface
         'name', 'description',
     ];
 
+    /**
+     * Get the Category this Category belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id', 'id');
     }
 
+    /**
+     * Get all the sub-categories associated with this Category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
     }
 
+    /**
+     * Get all the products associated with this Category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function products()
     {
         return $this->hasMany(Product::class, 'category_id');

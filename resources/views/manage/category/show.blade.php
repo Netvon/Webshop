@@ -12,8 +12,8 @@
             <div class="panel-body">
 
                 <div class="btn-group" role="group" aria-label="...">
-                    <a class="btn btn-default" href="{{ URL::action('ProductController@create_in_category', $category->slug) }}">Add Product</a>
-                    <a class="btn btn-default" href="{{ URL::action('CategoryController@edit', $category->id) }}">Edit Category</a>
+                    <a class="btn btn-default" href="{{ URL::action('Manage\ProductController@create_in_category', $category->slug) }}">Add Product</a>
+                    <a class="btn btn-default" href="{{ URL::action('Manage\CategoryController@edit', $category->id) }}">Edit Category</a>
                 </div>
 
             </div>
@@ -27,7 +27,7 @@
         <div class="list-group">
             @foreach($category->children as $child)
                 <a class="list-group-item"
-                   href="{{URL::action('CategoryController@show', $child->slug)}}" >
+                   href="{{URL::action('Manage\CategoryController@show', $child->slug)}}" >
                     <h4 class="list-group-item-heading">{{$child->name}}</h4>
                     <p class="list-group-item-text">{{$child->description}}</p>
                 </a>
@@ -43,7 +43,7 @@
     <div class="list-group">
         @foreach($products as $product)
             <a class="list-group-item"
-               href="{{URL::action('ProductController@show', $product->slug)}}">
+               href="{{URL::action('Manage\ProductController@show', $product->slug)}}">
                 <span class="badge">€{{ $product->price }}</span>
                 <h4 class="list-group-item-heading">{{$product->name}}</h4>
                 <p class="list-group-item-text">{{ $product->description_short }}</p>

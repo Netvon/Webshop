@@ -1,9 +1,9 @@
-@extends('layouts.app', ['page_title' => trans('category.edit_title')])
+@extends('layouts.app', ['page_title' => trans('manage.category.edit_title')])
 
 @section('content')
     <h2>{{ trans('category.edit_title') }}</h2>
     {!! Form::model($category, ['method' => 'PATCH', 'action' => ['CategoryController@update', $category->id]]) !!}
-        @include('category.partials._form', ['submitButtonText' => trans('category.edit_action')])
+        @include('manage.category.partials._form', ['submitButtonText' => trans('manage.category.edit_action')])
     {!! Form::close() !!}
 
     {!! Form::model($category, ['method' => 'DELETE', 'action' => ['CategoryController@destroy', $category->id]]) !!}

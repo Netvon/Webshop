@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Manage;
 
 use App\Category;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Product;
 
 use App\Http\Requests;
 use App\ProductImage;
 use App\Specification;
+use App\Tag;
 use Carbon\Carbon;
 use Redirect;
 use Request;
@@ -30,17 +32,20 @@ class ProductController extends Controller
     {
 //        dd($product);
 
-        return view('product.show', compact('product'));
+        return view('manage.product.show', compact('product'));
     }
 
     public function create()
     {
-        return view('product.create', ['create_in_category' => null]);
+        return view('manage.product.create', [
+            'create_in_category' => null,
+            'tags'               => Tag::pluck('name', 'id'),
+        ]);
     }
 
     public function create_in_category(Category $create_in_category)
     {
-        return view('product.create', compact('create_in_category'));
+        return view('manage.product.create', compact('create_in_category'));
     }
 
     public function store(ProductRequest $request)
@@ -48,6 +53,10 @@ class ProductController extends Controller
         $input = $request->all();
 
         $product = Product::create($input);
+
+        if (array_key_exists('tag_list', $input)) {
+            $product->tags()->attach($input['tag_list']);
+        }
 
 //        dd($request->file('image'));
 
@@ -64,7 +73,7 @@ class ProductController extends Controller
                 $new_image->image_uri = $final_path;
                 $new_image->annotation = 'test';
                 $new_image->image_type = 'DETAIL';
-                $product->productImages()->save($new_image);
+                $product->images()->save($new_image);
             }
         }
 
@@ -88,6 +97,14 @@ class ProductController extends Controller
 //        dd($request->all());
         $product->update($request->all());
 
+//        dd($request->input('tag_list'));
+
+        if (array_key_exists('tag_list', $request->all())) {
+            $product->tags()->sync($request->input('tag_list'));
+        } else {
+            $product->tags()->detach();
+        }
+
 //        dd($request['spec']);
 
         foreach ($request['spec'] as $key => $spec) {
@@ -97,14 +114,15 @@ class ProductController extends Controller
             $product->specifications()->save($new_spec);
         }
 
-        return Redirect::action('ProductController@show', $product->slug);
+        return Redirect::action('Manage\ProductController@show', $product->slug);
     }
 
     public function edit(Product $product)
     {
-        return view('product.edit', [
+        return view('manage.product.edit', [
             'product'            => $product,
             'create_in_category' => $product->category,
+            'tags'               => Tag::pluck('name', 'id'),
         ]);
     }
 

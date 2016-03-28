@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilterProductTable extends Migration
+class CreateProductTagTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,14 @@ class CreateFilterProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('filter_product', function(Blueprint $table) {
-            $table->integer('filter_id')->unsigned()->index();
+        Schema::create('product_tag', function(Blueprint $table) {
+            $table->integer('tag_id')->unsigned()->index();
             $table->integer('product_id')->unsigned()->index();
-            $table->string('value');
             $table->timestamps();
 
-            $table->foreign('filter_id')
+            $table->foreign('tag_id')
                 ->references('id')
-                ->on('filters')
+                ->on('tags')
                 ->delete('cascade');
 
             $table->foreign('product_id')
@@ -28,7 +27,7 @@ class CreateFilterProductTable extends Migration
                 ->on('products')
                 ->delete('cascade');
 
-            $table->primary(['filter_id', 'product_id']);
+            $table->primary(['tag_id', 'product_id']);
         });
     }
 

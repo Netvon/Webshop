@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Manage;
 
 use App\Category;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
@@ -21,9 +22,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
+
         $cats = Category::with('children.children')->where('parent_id', null)->get();
 
-        return view('category.index', [
+        return view('manage.category.index', [
             'categories' => $cats,
         ]);
     }
@@ -32,7 +34,7 @@ class CategoryController extends Controller
     {
         $products = $category->products()->get();
 
-        return view('category.show', [
+        return view('manage.category.show', [
             'category' => $category,
             'products' => $products,
         ]);
@@ -40,7 +42,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('category.create');
+        return view('manage.category.create');
     }
 
     public function store(CategoryRequest $request)
@@ -64,7 +66,7 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return view('category.edit', compact('category'));
+        return view('manage.category.edit', compact('category'));
     }
 
     public function destroy(Category $category)

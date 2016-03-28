@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Filter extends Model
+class Tag extends Model
 {
     use SoftDeletes;
 
@@ -28,7 +28,6 @@ class Filter extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class)
-            ->withPivot('value')
             ->withTimestamps();
     }
 }
