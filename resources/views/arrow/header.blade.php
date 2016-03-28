@@ -59,23 +59,23 @@ _________________________________________________________ -->
                 <div class="navbar-collapse collapse" id="navigation">
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li @if ($nav_link === '/arrow')
+                        <li @if ($nav_link === 'arrow')
                             class="dropdown active"
-                                @endif
-                        >
+                            @endif
+                            >
                             <a href="/arrow">Home</a>
                         </li>
-                        <li @if ($nav_link === '/shop')
+                        <li @if ($nav_link === 'shop')
                             class="dropdown active"
-                                @endif
+                            @endif
                         >
                             <a href="/arrow/shop">Shop</a>
                         </li>
-                        <li
-                                @if ($nav_link === '/categories')
-                                class="dropdown active"
-                                @endif
-                        >
+                        <li class="dropdown use-yamm yamm-fw
+                            @if ($nav_link === 'categories')
+                                ,dropdown active
+                            @endif
+                        ">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b
                                         class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -93,8 +93,11 @@ _________________________________________________________ -->
                                                         @foreach($categories as $c)
                                                             @if (is_null($c->parent_id))
                                                                 <li><h5><a href="#">{{$c->name}}</a></h5></li>
-                                                            @else
-                                                                <li><a href="#">{{$c->name}}</a></li>
+                                                                @foreach($categories as $ca)
+                                                                    @if ($c->id == $ca->parent_id)
+                                                                            <li><a href="#">{{ $ca->name }}</a></li>
+                                                                    @endif
+                                                                @endforeach
                                                             @endif
 
                                                         @endforeach
@@ -109,16 +112,16 @@ _________________________________________________________ -->
 
                         <!-- ========== FULL WIDTH MEGAMENU END ================== -->
                         <li
-                                @if ($nav_link === '/about')
-                                class="dropdown active"
-                                @endif
+                            @if ($nav_link === 'about')
+                            class="dropdown active"
+                            @endif
                         >
                             <a href="#">About us</a>
                         </li>
                         <li
-                                @if ($nav_link === '/contact')
-                                class="dropdown active"
-                                @endif
+                            @if ($nav_link === 'contact')
+                            class="dropdown active"
+                            @endif
                         >
                             <a href="#">Contact</a>
                         </li>

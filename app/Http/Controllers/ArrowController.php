@@ -6,6 +6,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
+use App\Tag;
 
 class ArrowController extends Controller
 {
@@ -26,7 +27,7 @@ class ArrowController extends Controller
      */
     public function index()
     {
-        $nav_link = '/arrow';
+        $nav_link = 'arrow';
 
         $categories = Category::with('children.children')->get();
         $product_count = Product::all()->count();
@@ -42,11 +43,14 @@ class ArrowController extends Controller
      */
     public function shop()
     {
-        $nav_link = '/shop';
+        $nav_link = 'shop';
         
         $categories = Category::with('children.children')->get();
-
-        return view('arrow.shop', compact('nav_link', 'categories'));
+        $categories_filter = Product::query()->setQuery("SELECT *, COUNT(p.category_id) as sum_products FROM categories c LEFT JOIN products p ON c.id = p.category_id GROUP BY c.id");
+        $products = Product::all();
+        $tags = Tag::all();
+        
+        return view('arrow.shop', compact('nav_link', 'categories', 'categories_filter', 'products', 'tags'));
     }
 
     /**
