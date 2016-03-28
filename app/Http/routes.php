@@ -50,3 +50,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('manage', 'Manage\ManageController@index');
 });
+
+// ARROW
+Route::get('/arrow', 'ArrowController@index');
+
+Route::get('/arrow/shop', 'ArrowController@shop');
