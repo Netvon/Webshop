@@ -42,3 +42,5 @@ Route::group(['middleware' => 'web'], function () {
 
 // ARROW
 Route::get('/arrow', 'ArrowController@index');
+
+Route::get('/arrow/shop', 'ArrowController@shop');

@@ -1,4 +1,4 @@
-@extends('arrow.app', ['page_title' => 'Home'])
+@extends('arrow.app', ['page_title' => 'ARROW - Home'])
 
 @section('content')
 
@@ -16,13 +16,16 @@ _________________________________________________________ -->
                     <div class="row">
                         <div class="col-sm-5 right">
                             <p>
-                                <img src="img/logo.png" alt="">
+                                <img src="{{ asset('img/logo.png') }}" alt="">
                             </p>
                             <h1>Electronics webshop</h1>
-                            <p>Catagorie 1. Catagorie 2. Catagorie 3. Catagorie 4. Catagorie 5. Catagorie 6.</p>
+                            <p>
+                                We have some pretty awesome products in store for you.
+                            </p>
+                            <p>Check them out!</p>
                         </div>
                         <div class="col-sm-7">
-                            <img class="img-responsive" src="img/template-homepage.png" alt="">
+                            <img class="img-responsive" src="{{ asset('img/arrow.png') }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -30,16 +33,17 @@ _________________________________________________________ -->
                     <div class="row">
 
                         <div class="col-sm-7 text-center">
-                            <img class="img-responsive" src="img/template-mac.png" alt="">
+                            <img class="img-responsive" src="{{ asset('img/surface-pro-4.png') }}" alt="">
                         </div>
 
                         <div class="col-sm-5">
-                            <h2>46 HTML pages full of features</h2>
+                            <h2>now {{ $product_count }} products in store</h2>
                             <ul class="list-style-none">
-                                <li>Sliders and carousels</li>
-                                <li>4 Header variations</li>
-                                <li>Google maps, Forms, Megamenu, CSS3 Animations and much more</li>
-                                <li>+ 11 extra pages showing template features</li>
+                                @if (count($categories))
+                                    @foreach($categories as $c)
+                                        <li>{{ $c->name }}</li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
 
@@ -48,30 +52,15 @@ _________________________________________________________ -->
                 <div class="item">
                     <div class="row">
                         <div class="col-sm-5 right">
-                            <h1>Design</h1>
-                            <ul class="list-style-none">
-                                <li>Clean and elegant design</li>
-                                <li>Full width and boxed mode</li>
-                                <li>Easily readable Roboto font and awesome icons</li>
-                                <li>7 preprepared colour variations</li>
-                            </ul>
+                            <h1>{{ $product_showcase->name }}</h1>
+                            <p>
+                                TODO: Description
+                                {{ $product_showcase->description }}
+                            </p>
                         </div>
                         <div class="col-sm-7">
-                            <img class="img-responsive" src="img/template-easy-customize.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="row">
-                        <div class="col-sm-7">
-                            <img class="img-responsive" src="img/template-easy-code.png" alt="">
-                        </div>
-                        <div class="col-sm-5">
-                            <h1>Easy to customize</h1>
-                            <ul class="list-style-none">
-                                <li>7 preprepared colour variations.</li>
-                                <li>Easily to change fonts</li>
-                            </ul>
+                            TODO: Image
+                            <img class="img-responsive" src="{{ asset('img/' . $product_showcase->images ) }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -149,22 +138,22 @@ _________________________________________________________ -->
 
                 <ul class="owl-carousel customers">
                     <li class="item">
-                        <img src="img/customer-1.png" alt="" class="img-responsive">
+                        <img src="{{ asset('img/customer-1.png') }}" alt="" class="img-responsive">
                     </li>
                     <li class="item">
-                        <img src="img/customer-2.png" alt="" class="img-responsive">
+                        <img src="{{ asset('img/customer-2.png') }}" alt="" class="img-responsive">
                     </li>
                     <li class="item">
-                        <img src="img/customer-3.png" alt="" class="img-responsive">
+                        <img src="{{ asset('img/customer-3.png') }}" alt="" class="img-responsive">
                     </li>
                     <li class="item">
-                        <img src="img/customer-4.png" alt="" class="img-responsive">
+                        <img src="{{ asset('img/customer-4.png') }}" alt="" class="img-responsive">
                     </li>
                     <li class="item">
-                        <img src="img/customer-5.png" alt="" class="img-responsive">
+                        <img src="{{ asset('img/customer-5.png') }}" alt="" class="img-responsive">
                     </li>
                     <li class="item">
-                        <img src="img/customer-6.png" alt="" class="img-responsive">
+                        <img src="{{ asset('img/customer-6.png') }}" alt="" class="img-responsive">
                     </li>
                 </ul>
                 <!-- /.owl-carousel -->

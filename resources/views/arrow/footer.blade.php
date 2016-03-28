@@ -24,13 +24,12 @@ _________________________________________________________ -->
 
             <h4>Contact</h4>
 
-            <p><strong>Universal Ltd.</strong>
-                <br>13/25 New Avenue
-                <br>Newtown upon River
-                <br>45Y 73J
-                <br>England
+            <p><strong>ARROW CO.</strong>
+                <br>Onderwijsboulevard 215
+                <br>5223 DE
+                <br>Den Bosch
                 <br>
-                <strong>Great Britain</strong>
+                <strong>The Netherlands</strong>
             </p>
 
             <a href="contact.html" class="btn btn-small btn-template-main">Go to contact page</a>
@@ -73,13 +72,13 @@ _________________________________________________________ -->
 </script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<script src="js/jquery.cookie.js"></script>
-<script src="js/waypoints.min.js"></script>
-<script src="js/jquery.counterup.min.js"></script>
-<script src="js/jquery.parallax-1.1.3.js"></script>
-<script src="js/front.js"></script>
+<script src="{{ asset('js/jquery.cookie.js') }}"></script>
+<script src="{{ asset('js/waypoints.min.js') }}"></script>
+<script src="{{ asset('js/jquery.counterup.min.js') }}"></script>
+<script src="{{ asset('js/jquery.parallax-1.1.3.js') }}"></script>
+<script src="{{ asset('js/front.js') }}"></script>
 
 
 
 <!-- owl carousel -->
-<script src="js/owl.carousel.min.js"></script>
+<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
