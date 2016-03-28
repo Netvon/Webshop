@@ -37,30 +37,38 @@ _________________________________________________________ -->
                         </div>
 
                         <div class="col-sm-5">
-                            <h2>now {{ $product_count }} products in store</h2>
+                            <h2>
+                                {{ $product_count }}
+                                products are in store now</h2>
                             <ul class="list-style-none">
-                                @if (count($categories))
+                                @if (is_null($categories))
                                     @foreach($categories as $c)
                                         <li>{{ $c->name }}</li>
                                     @endforeach
                                 @endif
                             </ul>
                         </div>
-
                     </div>
+                </div>
+                <div class="item">
+                        <img class="img-responsive" src="{{ asset('img/main-slider4.jpg') }}" alt="">
                 </div>
                 <div class="item">
                     <div class="row">
                         <div class="col-sm-5 right">
-                            <h1>{{ $product_showcase->name }}</h1>
+                            <h1>
+                            @if ($product_showcase != NULL)
+                                {{ $product_showcase->name }}
+                            </h1>
                             <p>
                                 TODO: Description
-                                {{ $product_showcase->description }}
+                                {{ $product_showcase->description_long }}
                             </p>
                         </div>
                         <div class="col-sm-7">
                             TODO: Image
                             <img class="img-responsive" src="{{ asset('img/' . $product_showcase->images ) }}" alt="">
+                            @endif
                         </div>
                     </div>
                 </div>
