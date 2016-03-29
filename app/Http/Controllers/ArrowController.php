@@ -37,24 +37,7 @@ class ArrowController extends Controller
     }
 
     /**
-     * Show the application webshop.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function shop()
-    {
-        $nav_link = 'shop';
-        
-        $categories = Category::with('children.children')->get();
-        $categories_filter = Product::query()->setQuery("SELECT *, COUNT(p.category_id) as sum_products FROM categories c LEFT JOIN products p ON c.id = p.category_id GROUP BY c.id");
-        $products = Product::all();
-        $tags = Tag::all();
-        
-        return view('arrow.shop', compact('nav_link', 'categories', 'categories_filter', 'products', 'tags'));
-    }
-
-    /**
-     * Show the application dashboard.
+     * Show the about us page.
      *
      * @return \Illuminate\Http\Response
      */

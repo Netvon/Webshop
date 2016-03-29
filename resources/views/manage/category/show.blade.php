@@ -1,6 +1,6 @@
 @extends('layouts.arrow_page', ['page_title' => $category->name])
 
-@section('page_content')
+
     {{--<div class="page-header">--}}
         {{--<h2>{{ $category->name }}</h2>--}}
     {{--</div>--}}

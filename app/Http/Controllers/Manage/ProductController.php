@@ -23,6 +23,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        
         return view('manage.product.show', compact('product'));
     }
 
