@@ -69,13 +69,13 @@ _________________________________________________________ -->
                             >
                             <a href="/arrow">Home</a>
                         </li>
-                        @if(auth_has_role('admin'))
-                            <li @if($nav_link == 'manage') class="active" @endif>
-                                <a href="{{ URL::action('Manage\ManageController@index') }}">
-                                    Management tools
-                                </a>
-                            </li>
-                        @endif
+                        {{--@if(auth_has_role('admin'))--}}
+                            {{--<li @if($nav_link == 'manage') class="active" @endif>--}}
+                                {{--<a href="{{ URL::action('Manage\ManageController@index') }}">--}}
+                                    {{--Management tools--}}
+                                {{--</a>--}}
+                            {{--</li>--}}
+                        {{--@endif--}}
 
                         <li @if ($nav_link === 'shop')
                             class="dropdown active"
@@ -97,7 +97,7 @@ _________________________________________________________ -->
                                     <div class="yamm-content">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <img src="{{asset('img/template-easy-customize.png')}}"
+                                                <img src="{{asset('img/arrow.png')}}"
                                                      class="img-responsive hidden-xs" alt="">
                                             </div>
                                             <div class="col-sm-3">
@@ -125,6 +125,13 @@ _________________________________________________________ -->
                         </li>
 
                         <!-- ========== FULL WIDTH MEGAMENU END ================== -->
+
+                        <li @if ($nav_link === 'blog')
+                            class="dropdown active"
+                                @endif
+                        >
+                            <a href="/arrow/blog">Blog</a>
+                        </li>
                         <li
                             @if ($nav_link === 'about')
                             class="dropdown active"
