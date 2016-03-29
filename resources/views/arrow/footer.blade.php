@@ -24,7 +24,7 @@ _________________________________________________________ -->
 
             <h4>Contact</h4>
 
-            <p><strong>ARROW CO.</strong>
+            <p><strong>ARROW Co.</strong>
                 <br>Onderwijsboulevard 215
                 <br>5223 DE
                 <br>Den Bosch

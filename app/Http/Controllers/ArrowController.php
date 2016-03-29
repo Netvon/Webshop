@@ -50,4 +50,19 @@ class ArrowController extends Controller
         
         return view('arrow.about', compact('nav_link', 'breadcrumbs', 'categories'));
     }
+
+    /**
+     * Show the about us page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function contact()
+    {
+        $nav_link = 'contact';
+        $breadcrumbs = ['0' => 'contact'];
+
+        $categories = Category::with('children.children')->get();
+
+        return view('arrow.contact', compact('nav_link', 'breadcrumbs', 'categories'));
+    }
 }
