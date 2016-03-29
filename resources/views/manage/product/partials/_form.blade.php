@@ -3,13 +3,13 @@
     <div class="panel-body">
         <div class="form-group">
             {!! Form::label('category_id', trans('product.category')) !!}
-            @if(!$create_in_category)
+            @if(isset($create_in_category) && !$create_in_category)
                 <select class="form-control" name="category_id" id="categories_list">
                     @foreach(\App\Category::all() as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
-            @else
+            @elseif(isset($create_in_category))
                 <div class="form-control" readonly>{{ $create_in_category->name }}</div>
                 {!! Form::hidden('category_id', $create_in_category->id) !!}
             @endif

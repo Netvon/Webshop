@@ -19,8 +19,6 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return Blog::all();
-
         return view('manage.blog.index');
     }
 

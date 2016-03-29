@@ -102,10 +102,10 @@ _________________________________________________________ -->
                                             </div>
                                             <div class="col-sm-3">
 
-                                                @if (count($categories))
+                                                @if (count($categories) > 0)
                                                     <ul>
                                                         @foreach($categories as $c)
-                                                            @if (is_null($c->parent_id))
+                                                            @if (!is_null($c->parent_id))
                                                                 <li><h5><a href="#">{{$c->name}}</a></h5></li>
                                                                 @foreach($categories as $ca)
                                                                     @if ($c->id == $ca->parent_id)
