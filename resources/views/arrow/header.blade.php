@@ -7,8 +7,7 @@ _________________________________________________________ -->
             <div class="row">
                 <div class="col-xs-5 contact">
                     <p class="hidden-sm hidden-xs">Contact us on info&#64;arrow.com</p>
-                    <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i
-                                    class="fa fa-phone"></i></a> <a href="#" data-animate-hover="pulse"><i
+                    <p class="hidden-md hidden-lg"><a href="/arrow/contact" data-animate-hover="pulse"><i
                                     class="fa fa-envelope"></i></a>
                     </p>
                 </div>
@@ -59,24 +58,26 @@ _________________________________________________________ -->
                 <div class="navbar-collapse collapse" id="navigation">
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li @if ($nav_link === 'arrow')
+                        <li @if ($nav_link == 'arrow')
                             class="dropdown active"
                             @endif
                             >
                             <a href="/arrow">Home</a>
                         </li>
-                        <li @if ($nav_link === 'shop')
+                        <li @if ($nav_link == 'shop')
                             class="dropdown active"
                             @endif
                         >
                             <a href="/arrow/shop">Shop</a>
                         </li>
-                        <li class="dropdown use-yamm yamm-fw
-                            @if ($nav_link === 'categories')
-                                , dropdown active
+                        <li
+                            @if ($nav_link == 'categories')
+                            class="active dropdown use-yamm yamm-fw"
+                            @else
+                            class="dropdown use-yamm yamm-fw"
                             @endif
-                        ">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b
+                        >
+                            <a class="dropdown-toggle" data-toggle="dropdown">Categories<b
                                         class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -92,10 +93,10 @@ _________________________________________________________ -->
                                                     <ul>
                                                         @foreach($categories as $c)
                                                             @if (is_null($c->parent_id))
-                                                                <li><h5><a href="#">{{$c->name}}</a></h5></li>
+                                                                <li><h5><a href="/arrow/shop/categories/{{ $c->id }}">{{$c->name}}</a></h5></li>
                                                                 @foreach($categories as $ca)
                                                                     @if ($c->id == $ca->parent_id)
-                                                                            <li><a href="#">{{ $ca->name }}</a></li>
+                                                                            <li><a href="/arrow/shop/categories/{{ $ca->id }}">{{ $ca->name }}</a></li>
                                                                     @endif
                                                                 @endforeach
                                                             @endif

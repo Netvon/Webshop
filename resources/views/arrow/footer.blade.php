@@ -6,7 +6,7 @@ _________________________________________________________ -->
         <div class="col-md-3 col-sm-6">
             <h4>About us</h4>
 
-            <p>Created by: Tom van Nimwegen & Sander Grandia <br> We are two computerscience students. This site was commissioned by Avans Hogeschool.</p>
+            <p>Created by: Tom van Nimwegen & Sander Grandia <br> We are two computer science students. This site was commissioned by Avans Hogeschool.</p>
 
             <hr class="hidden-md hidden-lg hidden-sm">
 

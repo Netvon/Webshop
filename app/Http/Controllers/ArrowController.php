@@ -43,6 +43,11 @@ class ArrowController extends Controller
      */
     public function about()
     {
-        return view('arrow.about');
+        $nav_link = 'about';
+        $breadcrumbs = ['0' => 'about us'];
+
+        $categories = Category::with('children.children')->get();
+        
+        return view('arrow.about', compact('nav_link', 'breadcrumbs', 'categories'));
     }
 }
