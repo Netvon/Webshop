@@ -45,7 +45,7 @@ _________________________________________________________ -->
             <div class="container">
                 <div class="navbar-header">
 
-                    <a class="navbar-brand home" href="/">
+                    <a class="navbar-brand home" href="/arrow">
                         <img src="{{ asset('img/logo.png') }}" alt="Arrow logo" class="logo, hidden-xs hidden-sm">
                         <img src="{{ asset('img/logo-small.png') }}" alt="Arrow logo"
                              class="visible-xs visible-sm"><span
@@ -87,7 +87,7 @@ _________________________________________________________ -->
                         </li>
                         <li class="dropdown use-yamm yamm-fw
                             @if ($nav_link === 'categories')
-                                ,dropdown active
+                                , dropdown active
                             @endif
                         ">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b
@@ -130,14 +130,14 @@ _________________________________________________________ -->
                             class="dropdown active"
                             @endif
                         >
-                            <a href="#">About us</a>
+                            <a href="/arrow/about">About us</a>
                         </li>
                         <li
                             @if ($nav_link === 'contact')
                             class="dropdown active"
                             @endif
                         >
-                            <a href="#">Contact</a>
+                            <a href="/arrow/contact">Contact</a>
                         </li>
                     </ul>
 

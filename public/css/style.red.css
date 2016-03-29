@@ -1097,7 +1097,7 @@ fieldset[disabled] .btn-template-primary.active {
   top: 0;
 }
 .ribbon.new {
-  top: 50px;
+  top: 0;
 }
 .ribbon.new .theribbon {
   background-color: #5bc0de;

@@ -32,7 +32,7 @@ _________________________________________________________ -->
                 <strong>The Netherlands</strong>
             </p>
 
-            <a href="contact.html" class="btn btn-small btn-template-main">Go to contact page</a>
+            <a href="/arrow/contact" class="btn btn-small btn-template-main">Go to contact page</a>
 
             <hr class="hidden-md hidden-lg hidden-sm">
 

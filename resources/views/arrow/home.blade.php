@@ -88,27 +88,27 @@ _________________________________________________________ -->
             <div class="row">
                 <div class="col-md-4">
                     <div class="box-simple">
-                        <div class="icon">
+                        <a href="/arrow/about"><div class="icon">
                             <i class="fa fa-users"></i>
-                        </div>
+                        </div></a>
                         <h3>About us</h3>
                         <p>Who are we?</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="box-simple">
-                        <div class="icon">
+                        <a href="/arrow/shop"><div class="icon">
                             <i class="fa fa-desktop"></i>
-                        </div>
+                        </div></a>
                         <h3>Webshop</h3>
                         <p>Get your stuff here!</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="box-simple">
-                        <div class="icon">
+                        <a href="/arrow/contact"><div class="icon">
                             <i class="fa fa-envelope-o"></i>
-                        </div>
+                        </div></a>
                         <h3>Contact</h3>
                         <p>Get in touch</p>
                     </div>
@@ -128,7 +128,7 @@ _________________________________________________________ -->
                 <h3 class="text-uppercase">Want to get started?</h3>
                 <p class="lead">We have prepared many catagories of electronics to choose from.</p>
                 <p class="text-center">
-                    <a href="index2.html" class="btn btn-template-transparent-black btn-lg">Check out webshop</a>
+                    <a href="/arrow/shop" class="btn btn-template-transparent-black btn-lg">Check out webshop</a>
                 </p>
             </div>
 
