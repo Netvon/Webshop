@@ -14,11 +14,16 @@ _________________________________________________________ -->
                 <div class="col-xs-7">
                     <div class="login">
                         @if (Auth::guest())
-                            <a href="#" data-toggle="modal" data-target="#login-modal"><i
-                                        class="fa fa-sign-in"></i> <span
-                                        class="hidden-xs text-uppercase">Sign in</span></a>
+                            <a href="{{ URL::action('Auth\AuthController@login') }}"><i
+                                        class="fa fa-sign-in"></i>{{ trans('auth.login') }}</a>
+                            <a href="{{ URL::action('Auth\AuthController@register') }}"><i
+                                        class="fa fa-user"></i>{{ trans('auth.register') }}</a>
                         @else
-                            <a href="{{ URL::action('Auth\AuthController@logout') }}">{{ Auth::user()->name }}</a>
+                            <a href="{{ URL::action('Auth\AuthController@logout') }}"><i class="fa fa-user"></i> {{ Auth::user()->name }}</a>
+
+                            @if(auth_has_role('admin'))
+                                <a href="{{ URL::action('Manage\ManageController@index') }}"><i class="fa fa-cog"></i> Management tools</a>
+                            @endif
                         @endif
                     </div>
 
@@ -64,7 +69,15 @@ _________________________________________________________ -->
                             >
                             <a href="/arrow">Home</a>
                         </li>
-                        <li @if ($nav_link == 'shop')
+                        @if(auth_has_role('admin'))
+                            <li @if($nav_link == 'manage') class="active" @endif>
+                                <a href="{{ URL::action('Manage\ManageController@index') }}">
+                                    Management tools
+                                </a>
+                            </li>
+                        @endif
+
+                        <li @if ($nav_link === 'shop')
                             class="dropdown active"
                             @endif
                         >
@@ -89,7 +102,7 @@ _________________________________________________________ -->
                                             </div>
                                             <div class="col-sm-3">
 
-                                                @if (count($categories))
+                                                @if (count($categories) > 0)
                                                     <ul>
                                                         @foreach($categories as $c)
                                                             @if (is_null($c->parent_id))

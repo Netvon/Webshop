@@ -1,5 +1,10 @@
 @extends('layouts.arrow_page', ['page_title' => trans('product.create_title')])
 
+@section('page_breadcrumbs')
+    @include('manage.partials._breadcrumb')
+    <li>{{ trans('product.create_title') }}</li>
+@endsection
+
 @section('page_content')
     {{--@if(!$create_in_category)--}}
         {{--<h2>{{ trans('product.create_title') }}</h2>--}}

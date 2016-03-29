@@ -1,20 +1,4 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Routes File
-|--------------------------------------------------------------------------
-|
-| Here is where you will register all of the routes in an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -38,7 +22,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('cart', 'CartController@index');
 
-    Route::group(['prefix' => 'manage', 'middleware' => 'role:admin'], function(){
+    Route::group(['prefix' => 'manage', 'middleware' => 'role:admin'], function () {
 
         Route::get('products/create/in-category/{categories}', 'Manage\ProductController@create_in_category');
         Route::get('categories/create/in-category/{categories}', 'Manage\CategoryController@create_in_category');
@@ -46,6 +30,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::resource('categories', 'Manage\CategoryController');
         Route::resource('products', 'Manage\ProductController');
         Route::resource('tags', 'Manage\TagController', ['except' => 'create']);
+        Route::resource('blogs', 'Manage\BlogController', ['except' => 'show']);
+
         Route::patch('tags/restore/{trashedtags}', 'Manage\TagController@restore');
         Route::patch('categories/restore/{trashedcategories}', 'Manage\CategoryController@restore');
     });
@@ -54,10 +40,13 @@ Route::group(['middleware' => 'web'], function () {
 });
 
 // ARROW
-Route::get('/arrow', 'ArrowController@index');
-Route::get('/arrow/about', 'ArrowController@about');
+Route::group(['middleware' => 'web'], function () {
+    Route::get('arrow', 'ArrowController@index');
+    Route::get('arrow/shop', 'CategoryController@index');
 
-Route::get('/arrow/shop', 'CategoryController@index');
+    Route::get('/arrow', 'ArrowController@index');
+    Route::get('/arrow/about', 'ArrowController@about');
 
-Route::resource('/arrow/shop/categories', 'CategoryController');
-Route::resource('/arrow/shop/products', 'ProductController');
+    Route::resource('/arrow/shop/categories', 'CategoryController');
+    Route::resource('/arrow/shop/products', 'ProductController');
+});

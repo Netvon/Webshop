@@ -1,10 +1,6 @@
-@extends('layouts.arrow_page', ['page_title' => 'Webshop Manage'])
+@extends('layouts.arrow_page', ['page_title' => 'Management Tools'])
 
 @section('page_content')
-<div class="page-header">
-    <h2>Webshop Manager</h2>
-</div>
-
 <ul class="nav nav-pills nav-stacked">
     <li>
         <a href="{{URL::action('Manage\TagController@index')}}">Manage Tags</a>

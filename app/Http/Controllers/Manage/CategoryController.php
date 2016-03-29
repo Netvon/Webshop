@@ -34,7 +34,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('manage.category.create');
+        return view('manage.category.create', ['create_in_category' => null]);
     }
 
     public function create_in_category(Category $create_in_category)
@@ -51,14 +51,14 @@ class CategoryController extends Controller
         $category->parent()->associate(Category::find($input['parent']));
         $category->save();
 
-        return redirect('categories');
+        return redirect()->action('Manage\CategoryController@index');
     }
 
     public function update(Category $category, CategoryRequest $request)
     {
         $category->update($request->all());
 
-        return redirect('categories');
+        return redirect()->action('Manage\CategoryController@index');
     }
 
     public function edit(Category $category)

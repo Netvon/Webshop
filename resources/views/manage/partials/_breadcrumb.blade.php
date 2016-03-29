@@ -1,0 +1,1 @@
+<li><a href="{{ URL::action('Manage\ManageController@index') }}">Manage</a></li>
