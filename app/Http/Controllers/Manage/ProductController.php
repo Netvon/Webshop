@@ -79,7 +79,7 @@ class ProductController extends Controller
 
         flash(trans('product.flash_created', ['name' => $product->name]), 'success');
 
-        return redirect('/');
+        return redirect()->action('Manage\ManageController@index');
     }
 
     public function update(Product $product, ProductRequest $request)
@@ -122,6 +122,6 @@ class ProductController extends Controller
         $product = Product::findBySlugOrIdOrFail($id);
         $product->delete();
 
-        return redirect('/');
+        return redirect()->action('Manage\ManageController@index');
     }
 }

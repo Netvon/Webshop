@@ -10,9 +10,14 @@
 </div>
 <div class="form-group">
     <select class="form-control" name="parent">
-    @foreach(\App\Category::all() as $parent)
-        <option value="{{ $parent->id }}">{{ $parent->name }}</option>
-    @endforeach
+        <option value="-1">--------</option>
+        @foreach(\App\Category::all() as $parent)
+            @if(!is_null($create_in_category) && $create_in_category == $parent)
+                <option value="{{ $parent->id }}" selected>{{ $parent->name }}</option>
+            @else
+                <option value="{{ $parent->id }}">{{ $parent->name }}</option>
+            @endif
+        @endforeach
     </select>
 </div>
 <div class="form-group">

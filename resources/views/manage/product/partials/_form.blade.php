@@ -34,6 +34,10 @@
                 </div>
             </div>
         </div>
+        <div class="form-group">
+            {!! Form::label('is_in_stock', trans('product.is_in_stock')) !!}
+            {!! Form::checkbox('is_in_stock', null, ['class' => 'form-control']) !!}
+        </div>
     </div>
 </div>
 <div class="panel panel-default">
@@ -52,15 +56,10 @@
     </div>
 </div>
 
-<div class="form-group">
-    {!! Form::label('is_in_stock', trans('product.is_in_stock')) !!}
-    {!! Form::checkbox('is_in_stock', null, ['class' => 'form-control']) !!}
-</div>
-
 <div class="panel panel-default">
-    <div class="panel-heading">Specificaties</div>
+    <div class="panel-heading">{{ str_plural(trans('specification.object_name')) }}</div>
     <p class="panel-body">
-        <a class="btn btn-default" id="product-spec-add">Voeg toe</a>
+        <a class="btn btn-default" id="product-spec-add">{{ trans('specification.create_action') }}</a>
     </p>
     <ul class="list-group" id="product-spec-list">
         @if(old('spec'))
@@ -74,15 +73,19 @@
         @endif
     </ul>
 </div>
+<div class="panel panel-default">
+    <div class="panel-heading">Other</div>
+    <div class="panel-body">
+        <div class="form-group">
+            {!! Form::label('image', 'Choose an image') !!}
+            {!! Form::file('image[]', ['multiple', 'class' => 'form-control']) !!}
+        </div>
 
-<div class="form-group">
-    {!! Form::label('image', 'Choose an image') !!}
-    {!! Form::file('image[]', ['multiple', 'class' => 'form-control']) !!}
-</div>
-
-<div class="form-group">
-    {!! Form::label('tag_list', 'Tags:') !!}
-    {!! Form::select('tag_list[]', $tags, null, ['class' => 'form-control', 'multiple',  'id' => 'tags_list']) !!}
+        <div class="form-group">
+            {!! Form::label('tag_list', str_plural(trans('tag.object_name'))) !!}
+            {!! Form::select('tag_list[]', $tags, null, ['class' => 'form-control', 'multiple',  'id' => 'tags_list']) !!}
+        </div>
+    </div>
 </div>
 
 <div class="form-group">

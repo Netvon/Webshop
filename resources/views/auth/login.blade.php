@@ -1,6 +1,6 @@
-@extends('layouts.app', ['page_title' => 'Login'])
+@extends('layouts.arrow_page', ['page_title' => 'Login'])
 
-@section('content')
+@section('page_content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

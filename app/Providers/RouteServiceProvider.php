@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Blog;
 use App\Category;
 use App\Product;
 use App\Tag;
@@ -94,6 +95,11 @@ class RouteServiceProvider extends ServiceProvider
             }
 
             return $category;
+        });
+
+        $router->bind('blogs', function($idOrSlug)
+        {
+            return Blog::findBySlugOrIdOrFail($idOrSlug);
         });
     }
 
