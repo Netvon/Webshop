@@ -7,7 +7,7 @@ _________________________________________________________ -->
             <div class="row">
                 <div class="col-xs-5 contact">
                     <p class="hidden-sm hidden-xs">Contact us on info&#64;arrow.com</p>
-                    <p class="hidden-md hidden-lg"><a href="/arrow/contact" data-animate-hover="pulse"><i
+                    <p class="hidden-md hidden-lg"><a href="{{ URL::action('ArrowController@contact') }}" data-animate-hover="pulse"><i
                                     class="fa fa-envelope"></i></a>
                     </p>
                 </div>
@@ -44,7 +44,7 @@ _________________________________________________________ -->
             <div class="container">
                 <div class="navbar-header">
 
-                    <a class="navbar-brand home" href="/arrow">
+                    <a class="navbar-brand home" href="{{ URL::action('ArrowController@index') }}">
                         <img src="{{ asset('img/logo.png') }}" alt="Arrow logo" class="logo, hidden-xs hidden-sm">
                         <img src="{{ asset('img/logo-small.png') }}" alt="Arrow logo"
                              class="visible-xs visible-sm"><span
@@ -63,11 +63,11 @@ _________________________________________________________ -->
                 <div class="navbar-collapse collapse" id="navigation">
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li @if ($nav_link == 'arrow')
+                        <li @if ($nav_link == 'home')
                             class="dropdown active"
                             @endif
                             >
-                            <a href="/arrow">Home</a>
+                            <a href="{{ URL::action('ArrowController@index') }}">Home</a>
                         </li>
                         {{--@if(auth_has_role('admin'))--}}
                             {{--<li @if($nav_link == 'manage') class="active" @endif>--}}
@@ -81,7 +81,7 @@ _________________________________________________________ -->
                             class="dropdown active"
                             @endif
                         >
-                            <a href="/arrow/shop">Shop</a>
+                            <a href="{{ URL::action('CategoryController@index') }}">Shop</a>
                         </li>
                         <li
                             @if ($nav_link == 'categories')
@@ -106,10 +106,11 @@ _________________________________________________________ -->
                                                     <ul>
                                                         @foreach($categories as $c)
                                                             @if (is_null($c->parent_id))
-                                                                <li><h5><a href="/arrow/shop/categories/{{ $c->id }}">{{$c->name}}</a></h5></li>
+                                                                <li><h5><a href="{{ URL::action('CategoryController@show', $c->slug) }}">{{$c->name}}</a></h5></li>
+
                                                                 @foreach($categories as $ca)
                                                                     @if ($c->id == $ca->parent_id)
-                                                                            <li><a href="/arrow/shop/categories/{{ $ca->id }}">{{ $ca->name }}</a></li>
+                                                                        <li><a href="{{ URL::action('CategoryController@show', $ca->slug) }}">{{ $ca->name }}</a></li>
                                                                     @endif
                                                                 @endforeach
                                                             @endif
@@ -130,21 +131,21 @@ _________________________________________________________ -->
                             class="dropdown active"
                                 @endif
                         >
-                            <a href="/arrow/blog">Blog</a>
+                            <a href="{{ URL::action('Manage\BlogController@index') }}">Blog</a>
                         </li>
                         <li
                             @if ($nav_link === 'about')
                             class="dropdown active"
                             @endif
                         >
-                            <a href="/arrow/about">About us</a>
+                            <a href="{{ URL::action('ArrowController@about') }}">About us</a>
                         </li>
                         <li
                             @if ($nav_link === 'contact')
                             class="dropdown active"
                             @endif
                         >
-                            <a href="/arrow/contact">Contact</a>
+                            <a href="{{ URL::action('ArrowController@contact') }}">Contact</a>
                         </li>
                     </ul>
 

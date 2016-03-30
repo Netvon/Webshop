@@ -1,4 +1,4 @@
-@extends('arrow.app', ['page_title' => 'ARROW - Home'])
+@extends('layouts.app', ['page_title' => 'ARROW - Home', 'nav_link' => 'home'])
 
 @section('content')
 
@@ -88,7 +88,7 @@ _________________________________________________________ -->
             <div class="row">
                 <div class="col-md-4">
                     <div class="box-simple">
-                        <a href="/arrow/about"><div class="icon">
+                        <a href="{{ URL::action('ArrowController@about') }}"><div class="icon">
                             <i class="fa fa-users"></i>
                         </div></a>
                         <h3>About us</h3>
@@ -97,7 +97,7 @@ _________________________________________________________ -->
                 </div>
                 <div class="col-md-4">
                     <div class="box-simple">
-                        <a href="/arrow/shop"><div class="icon">
+                        <a href="{{ URL::action('CategoryController@index') }}"><div class="icon">
                             <i class="fa fa-desktop"></i>
                         </div></a>
                         <h3>Webshop</h3>

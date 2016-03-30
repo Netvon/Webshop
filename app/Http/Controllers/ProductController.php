@@ -23,13 +23,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $nav_link = 'shop';
-        $breadcrumbs = ['/arrow/shop' => 'shop', '0' => $product->name];
-
-        $categories = Category::with('children.children')->get();
         $products = Product::all()->where('category_id', $product->category_id)->take(3);
-        $tags = Tag::all();
+        $specifications = $product->specifications()->getResults();
         
-        return view('arrow.product.show', compact('product', 'nav_link', 'breadcrumbs', 'categories', 'products', 'tags'));
+        return view('arrow.product.show', compact('product', 'products', 'specifications'));
     }
 }
