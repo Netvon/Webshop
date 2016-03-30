@@ -45,7 +45,6 @@
 
                         @include('arrow.category.partials._product_list', ['products' => App\Product::all()])
 
-
                         {{--<div class="pages">--}}
 
                             {{--<p class="loadMore">--}}

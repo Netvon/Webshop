@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -19,17 +20,39 @@ class CartController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index()
     {
+        $cart = new Cart();
+//        $cart->push_product(1, 10);
+        return view('cart.index', ['cart' => $cart->products()]);
+    }
 
-//        $request->session()->forget('cart.products');
-//        $request->session()->push('cart.products', Product::all(['id', 'name'])->toArray());
+    public function destroy(Request $request)
+    {
+        $product_id = $request->input('product_id');
 
-//        dd(session());
-//        \Session::push('cart.products', Product::all(['id', 'name'])->toArray());
+        $cart = new Cart();
+        $cart->pull_product($product_id);
 
+        return redirect()->back();
+    }
 
-//        dd(session('cart.products'));
-        return view('cart.index', ['products' => session('cart.products')[0]]);
+    public function store(Request $request)
+    {
+        $product_id = $request->input('product_id');
+        $quantity = $request->input('quantity');
+
+        $cart = new Cart();
+        $cart->push_product($product_id, $quantity);
+
+        return redirect()->back();
+    }
+
+    public function order()
+    {
+        $cart = new Cart();
+        $order = $cart->make_order();
+
+        return redirect()->action('OrderController@index');
     }
 }

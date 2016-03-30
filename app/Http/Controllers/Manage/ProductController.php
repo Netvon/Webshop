@@ -118,9 +118,8 @@ class ProductController extends Controller
         ]);
     }
 
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $product = Product::findBySlugOrIdOrFail($id);
         $product->delete();
 
         return redirect()->action('Manage\ManageController@index');
