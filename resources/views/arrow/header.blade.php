@@ -25,6 +25,8 @@ _________________________________________________________ -->
                                 <a href="{{ URL::action('Manage\ManageController@index') }}"><i class="fa fa-cog"></i> Management tools</a>
                             @endif
                         @endif
+
+                            <a href="{{ URL::action('CartController@index') }}"><i class="fa fa-shopping-cart"></i> Cart</a>
                     </div>
 
                 </div>
@@ -44,7 +46,7 @@ _________________________________________________________ -->
             <div class="container">
                 <div class="navbar-header">
 
-                    <a class="navbar-brand home" href="/arrow">
+                    <a class="navbar-brand home" href="{{ URL::action('ArrowController@index') }}">
                         <img src="{{ asset('img/logo.png') }}" alt="Arrow logo" class="logo, hidden-xs hidden-sm">
                         <img src="{{ asset('img/logo-small.png') }}" alt="Arrow logo"
                              class="visible-xs visible-sm"><span
@@ -63,11 +65,11 @@ _________________________________________________________ -->
                 <div class="navbar-collapse collapse" id="navigation">
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li @if ($nav_link == 'arrow')
+                        <li @if ($nav_link == 'home')
                             class="dropdown active"
                             @endif
                             >
-                            <a href="/arrow">Home</a>
+                            <a href="{{ URL::action('ArrowController@index') }}">{{ trans('menu.home') }}</a>
                         </li>
                         {{--@if(auth_has_role('admin'))--}}
                             {{--<li @if($nav_link == 'manage') class="active" @endif>--}}
@@ -81,7 +83,7 @@ _________________________________________________________ -->
                             class="dropdown active"
                             @endif
                         >
-                            <a href="{{ URL::action('ArrowController@contact') }}">Shop</a>
+                            <a href="{{ URL::action('CategoryController@index') }}">{{ trans('menu.shop') }}</a>
                         </li>
                         <li
                             @if ($nav_link == 'categories')
@@ -90,7 +92,7 @@ _________________________________________________________ -->
                             class="dropdown use-yamm yamm-fw"
                             @endif
                         >
-                            <a class="dropdown-toggle" data-toggle="dropdown">Categories<b
+                            <a class="dropdown-toggle" data-toggle="dropdown">{{ trans('menu.categories') }}<b
                                         class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -106,10 +108,11 @@ _________________________________________________________ -->
                                                     <ul>
                                                         @foreach($categories as $c)
                                                             @if (is_null($c->parent_id))
-                                                                <li><h5><a href="/arrow/shop/categories/{{ $c->id }}">{{$c->name}}</a></h5></li>
+                                                                <li><h5><a href="{{ URL::action('CategoryController@show', $c->slug) }}">{{$c->name}}</a></h5></li>
+
                                                                 @foreach($categories as $ca)
                                                                     @if ($c->id == $ca->parent_id)
-                                                                            <li><a href="/arrow/shop/categories/{{ $ca->id }}">{{ $ca->name }}</a></li>
+                                                                        <li><a href="{{ URL::action('CategoryController@show', $ca->slug) }}">{{ $ca->name }}</a></li>
                                                                     @endif
                                                                 @endforeach
                                                             @endif
@@ -130,21 +133,21 @@ _________________________________________________________ -->
                             class="dropdown active"
                                 @endif
                         >
-                            <a href="/arrow/blog">Blog</a>
+                            <a href="{{ URL::action('BlogController@index') }}">{{ trans('menu.blog') }}</a>
                         </li>
                         <li
                             @if ($nav_link === 'about')
                             class="dropdown active"
                             @endif
                         >
-                            <a href="/arrow/about">About us</a>
+                            <a href="{{ URL::action('ArrowController@about') }}">{{ trans('menu.about') }}</a>
                         </li>
                         <li
                             @if ($nav_link === 'contact')
                             class="dropdown active"
                             @endif
                         >
-                            <a href="/arrow/contact">Contact</a>
+                            <a href="{{ URL::action('ArrowController@contact') }}">{{  trans('menu.contact') }}</a>
                         </li>
                     </ul>
 

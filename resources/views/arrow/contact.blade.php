@@ -1,4 +1,4 @@
-@extends('arrow.app', ['page_title' => 'ARROW - Contact'])
+@extends('layouts.app', ['page_title' => 'ARROW - Contact', 'nav_link' => 'contact'])
 
 @section('content')
         <div id="heading-breadcrumbs">
@@ -7,20 +7,7 @@
                     <div class="col-md-7">
                         <h1>Contact</h1>
                     </div>
-                    <div class="col-md-5">
-                        <ul class="breadcrumb">
-                            <li><a href="/arrow">Home</a>
-                            </li>
-                            @foreach($breadcrumbs as $key => $value)
-                                @if ($key == '0')
-                                    <li>{{ $value }}</li>
-                                @else
-                                    <li><a href="{{ $key }}">{{ $value }}</a></li>
-                                @endif
-                            @endforeach
-                        </ul>
-
-                    </div>
+                    @include('arrow.partials._breadcrumbs', ['breadcrumbs' => ['ArrowController@index' => 'home', '0' => 'contact']])
                 </div>
             </div>
         </div>

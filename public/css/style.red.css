@@ -2755,6 +2755,11 @@ fieldset[disabled] .btn-template-primary.active {
   color: #ffffff;
   background-color: #da4d4d;
 }
+.nav-pills > li > ul > li.active > a,
+.nav-pills > li > ul > li.active > a:hover,
+.nav-pills > li > ul > li.active > a:focus {
+  background-color: #EEEEEE;
+}
 .nav-stacked > li {
   float: none;
 }

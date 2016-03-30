@@ -1,4 +1,4 @@
-@extends('arrow.app', ['page_title' => 'Arrow - '.$page_title, 'nav_link' => 'manage', 'categories' => \App\Category::all()])
+@extends('layouts.app', ['page_title' => 'Arrow - '.$page_title, 'nav_link' => 'manage', 'categories' => \App\Category::all()])
 
 @section('content')
     <div id="heading-breadcrumbs">

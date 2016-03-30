@@ -66,4 +66,9 @@ class Product extends Model implements SluggableInterface
         return $this->hasMany(ProductImage::class);
     }
 
+    public function images_by_type($type)
+    {
+        return $this->images->where('image_type', $type);
+    }
+
 }

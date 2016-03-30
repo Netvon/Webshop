@@ -12,20 +12,13 @@
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-
-//    Route::get('/', function () {
-//        return view('welcome');
-//    });
-
-//    Route::get('home', 'HomeController@index');
-
-
+    
     Route::get('cart', 'CartController@index');
     Route::post('cart', 'CartController@store');
     Route::delete('cart', 'CartController@destroy');
     Route::get('cart/order', 'CartController@order');
     Route::get('order', 'OrderController@index');
-
+    
     Route::group(['prefix' => 'manage', 'middleware' => 'role:admin'], function () {
 
         Route::get('products/create/in-category/{categories}', 'Manage\ProductController@create_in_category');
@@ -45,12 +38,17 @@ Route::group(['middleware' => 'web'], function () {
 
 // ARROW
 Route::group(['middleware' => 'web'], function () {
-    Route::get('shop', 'CategoryController@index');
 
     Route::get('/', 'ArrowController@index');
     Route::get('about', 'ArrowController@about');
     Route::get('contact', 'ArrowController@contact');
+    Route::get('shop', 'CategoryController@index');
+    Route::get('cart', 'CartController@index');
+    
+    Route::get('blog', 'BlogController@index');
+    Route::post('search', 'ProductController@search');
 
     Route::resource('shop/categories', 'CategoryController');
     Route::resource('shop/products', 'ProductController');
+    Route::resource('blog', 'BlogController');
 });
