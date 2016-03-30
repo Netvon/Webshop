@@ -131,7 +131,7 @@ _________________________________________________________ -->
                             class="dropdown active"
                                 @endif
                         >
-                            <a href="{{ URL::action('Manage\BlogController@index') }}">Blog</a>
+                            <a href="{{ URL::action('BlogController@index') }}">Blog</a>
                         </li>
                         <li
                             @if ($nav_link === 'about')

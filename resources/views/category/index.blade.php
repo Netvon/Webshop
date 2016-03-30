@@ -43,7 +43,7 @@
 
                     <div class="col-sm-9">
 
-                        @include('arrow.category.partials._product_list', ['products' => App\Product::all()])
+                        @include('category.partials._product_list', ['products' => App\Product::all()])
 
                         {{--<div class="pages">--}}
 

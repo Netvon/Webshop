@@ -26,6 +26,6 @@ class ProductController extends Controller
         $products = Product::all()->where('category_id', $product->category_id)->take(3);
         $specifications = $product->specifications()->getResults();
         
-        return view('arrow.product.show', compact('product', 'products', 'specifications'));
+        return view('product.show', compact('product', 'products', 'specifications'));
     }
 }

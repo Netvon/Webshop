@@ -1,7 +1,38 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Tom
- * Date: 29-3-2016
- * Time: 15:09
- */
+@extends('layouts.app', ['page_title' => 'ARROW - ' . $blog->title, 'nav_link' => 'blog'])
+
+@section('content')
+    <div id="heading-breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1>{{ $blog->title }}</h1>
+                </div>
+                @include('arrow.partials._breadcrumbs', ['breadcrumbs' => ['ArrowController@index' => 'home', 'BlogController@index' => 'blog', '0' => $blog->title]])
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="container">
+
+            <div class="row">
+
+                <!-- #blog-post -->
+
+                <div class="col-md-9" id="blog-post">
+
+
+                    <p class="text-muted text-uppercase mb-small text-right">By {AUTOR} | {DATE}</p>
+                    <p class="lead">{{ $blog->body }}</p>
+
+                </div>
+                <!-- /#blog-post -->
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+@endsection

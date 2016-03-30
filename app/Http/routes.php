@@ -44,8 +44,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('contact', 'ArrowController@contact');
     Route::get('shop', 'CategoryController@index');
     Route::get('cart', 'CartController@index');
+    
+    Route::get('blog', 'BlogController@index');
 
 
     Route::resource('shop/categories', 'CategoryController');
     Route::resource('shop/products', 'ProductController');
+    Route::resource('blog', 'BlogController');
 });

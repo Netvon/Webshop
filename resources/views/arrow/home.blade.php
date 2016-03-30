@@ -128,7 +128,7 @@ _________________________________________________________ -->
                 <h3 class="text-uppercase">Want to get started?</h3>
                 <p class="lead">We have prepared many catagories of electronics to choose from.</p>
                 <p class="text-center">
-                    <a href="/arrow/shop" class="btn btn-template-transparent-black btn-lg">Check out webshop</a>
+                    <a href="{{ URL::action('CategoryController@index') }}" class="btn btn-template-transparent-black btn-lg">Check out webshop</a>
                 </p>
             </div>
 

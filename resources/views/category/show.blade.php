@@ -43,7 +43,7 @@
 
                 <div class="col-sm-9">
 
-                    @include('arrow.category.partials._product_list', ['products' => $category->products()->get()])
+                    @include('category.partials._product_list', ['products' => $category->products()->get()])
 
 
                     {{--<div class="pages">--}}

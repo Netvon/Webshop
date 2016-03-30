@@ -23,7 +23,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('arrow.category.index');
+        return view('category.index');
     }
 
     /**
@@ -34,6 +34,6 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        return view('arrow.category.show', compact('category'));
+        return view('category.show', compact('category'));
     }
 }
