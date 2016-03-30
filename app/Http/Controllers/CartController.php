@@ -51,7 +51,7 @@ class CartController extends Controller
     public function order()
     {
         $cart = new Cart();
-        $order = $cart->make_order();
+        $cart->make_order();
 
         return redirect()->action('OrderController@index');
     }
