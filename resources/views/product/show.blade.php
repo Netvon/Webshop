@@ -74,17 +74,16 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="box">
+                                    {!! Form::open(['action' => 'CartController@store']) !!}
+                                    {!! Form::hidden('product_id', $product->id) !!}
+                                    <p class="price">$ {{ $product->price }}</p>
 
-                                    <form>
-                                        <p class="price">$ {{ $product->price }}</p>
+                                    <p class="text-center">
+                                        <button type="submit" class="btn btn-template-main"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+                                        {{Form::number('quantity', 1)}}
+                                    </p>
 
-                                        <p class="text-center">
-                                            <button type="submit" class="btn btn-template-main"><i class="fa fa-shopping-cart"></i> Add to cart</button>
-                                            <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Add to wishlist"><i class="fa fa-heart-o"></i>
-                                            </button>
-                                        </p>
-
-                                    </form>
+                                    {!! Form::close() !!}
                                 </div>
                             </div>
 

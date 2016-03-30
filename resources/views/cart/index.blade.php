@@ -1,4 +1,4 @@
-@extends('layouts.arrow_app', ['page_title' => trans('cart.index_title'), 'nav_link' => 'cart'])
+@extends('layouts.arrow_page', ['page_title' => trans('cart.index_title'), 'nav_link' => 'cart'])
 
 @section('page_content')
     @if(count($cart) > 0)
