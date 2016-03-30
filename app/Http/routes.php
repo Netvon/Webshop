@@ -46,7 +46,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('cart', 'CartController@index');
     
     Route::get('blog', 'BlogController@index');
-
+    Route::post('search', 'ProductController@search');
 
     Route::resource('shop/categories', 'CategoryController');
     Route::resource('shop/products', 'ProductController');

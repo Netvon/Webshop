@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page_title' => trans('cart.index_title')])
+@extends('layouts.app', ['page_title' => trans('cart.index_title'), 'nav_link' => 'cart'])
 
 @section('content')
     <div class="page-header">

@@ -13,7 +13,8 @@ use App\Specification;
 use App\Tag;
 use Carbon\Carbon;
 use Redirect;
-use Request;
+use Illuminate\Http\Request;
+
 
 class ProductController extends Controller
 {
@@ -27,5 +28,23 @@ class ProductController extends Controller
         $specifications = $product->specifications()->getResults();
         
         return view('product.show', compact('product', 'products', 'specifications'));
+    }
+
+    public function search(Request $request)
+    {
+        $products = Product::all();
+        $search_products = new \Illuminate\Database\Eloquent\Collection();
+
+        foreach ($products as $p)
+        {
+            if (str_contains(strtolower($p->name), strtolower($request->body)))
+            {
+                $search_products->add($p);
+            }
+        }
+
+        return view('category.search', compact('search_products', 'request'));
+
+//        return $request->all();
     }
 }
