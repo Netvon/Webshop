@@ -2,12 +2,11 @@
 
 namespace App\Listeners;
 
-use Illuminate\Auth\Events\Logout;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Session;
 
-class AuthLogoutEventListener
+class AuthLoginEventListener
 {
     /**
      * Create the event listener.
@@ -22,10 +21,10 @@ class AuthLogoutEventListener
     /**
      * Handle the event.
      *
-     * @param  Logout  $event
+     * @param  login  $event
      * @return void
      */
-    public function handle(Logout $event)
+    public function handle(Login $event)
     {
         \Session::forget('cart.products');
     }

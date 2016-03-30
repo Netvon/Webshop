@@ -7,7 +7,7 @@ _________________________________________________________ -->
             <div class="row">
                 <div class="col-xs-5 contact">
                     <p class="hidden-sm hidden-xs">Contact us on info&#64;arrow.com</p>
-                    <p class="hidden-md hidden-lg"><a href="/arrow/contact" data-animate-hover="pulse"><i
+                    <p class="hidden-md hidden-lg"><a href="{{ URL::action('ArrowController@contact') }}" data-animate-hover="pulse"><i
                                     class="fa fa-envelope"></i></a>
                     </p>
                 </div>
@@ -81,7 +81,7 @@ _________________________________________________________ -->
                             class="dropdown active"
                             @endif
                         >
-                            <a href="/arrow/shop">Shop</a>
+                            <a href="{{ URL::action('ArrowController@contact') }}">Shop</a>
                         </li>
                         <li
                             @if ($nav_link == 'categories')

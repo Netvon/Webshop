@@ -13,14 +13,18 @@
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+//    Route::get('/', function () {
+//        return view('welcome');
+//    });
 
-    Route::get('home', 'HomeController@index');
+//    Route::get('home', 'HomeController@index');
 
 
     Route::get('cart', 'CartController@index');
+    Route::post('cart', 'CartController@store');
+    Route::delete('cart', 'CartController@destroy');
+    Route::get('cart/order', 'CartController@order');
+    Route::get('order', 'OrderController@index');
 
     Route::group(['prefix' => 'manage', 'middleware' => 'role:admin'], function () {
 
@@ -41,13 +45,12 @@ Route::group(['middleware' => 'web'], function () {
 
 // ARROW
 Route::group(['middleware' => 'web'], function () {
-    Route::get('arrow', 'ArrowController@index');
-    Route::get('arrow/shop', 'CategoryController@index');
+    Route::get('shop', 'CategoryController@index');
 
-    Route::get('/arrow', 'ArrowController@index');
-    Route::get('/arrow/about', 'ArrowController@about');
-    Route::get('/arrow/contact', 'ArrowController@contact');
+    Route::get('/', 'ArrowController@index');
+    Route::get('about', 'ArrowController@about');
+    Route::get('contact', 'ArrowController@contact');
 
-    Route::resource('/arrow/shop/categories', 'CategoryController');
-    Route::resource('/arrow/shop/products', 'ProductController');
+    Route::resource('shop/categories', 'CategoryController');
+    Route::resource('shop/products', 'ProductController');
 });

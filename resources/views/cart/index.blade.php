@@ -4,10 +4,10 @@
     <div class="page-header">
         <h2>{{ trans('cart.index_title') }}</h2>
     </div>
-    @if(count($products) > 0)
+    @if(count($cart) > 0)
         <ul class="list-group">
-            @foreach($products as $product)
-                <li class="list-group-item">{{ $product['name'] }}</li>
+            @foreach($cart as $pq)
+                <li class="list-group-item">{{ $pq['product']->name }} - {{ $pq['quantity'] }}</li>
             @endforeach
         </ul>
     @else

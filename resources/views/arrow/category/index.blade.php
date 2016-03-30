@@ -45,14 +45,14 @@
                                         @foreach($categories as $c)
                                             @if (is_null($c->parent_id))
                                                 <li>
-                                                <a href="/arrow/shop/categories/{{ $c->id }}">{{ $c->name }}
+                                                <a href="/arrow/shop/categories/{{ $c->slug }}">{{ $c->name }}
                                                     {{--<span class="badge pull-right">42</span>--}}
                                                 </a>
 
                                                 @foreach($categories as $ca)
                                                     @if ($c->id == $ca->parent_id)
                                                             <ul>
-                                                                <li><a href="/arrow/shop/categories/{{ $ca->id }}">{{ $ca->name }}</a></li>
+                                                                <li><a href="/arrow/shop/categories/{{ $ca->slug }}">{{ $ca->name }}</a></li>
                                                             </ul>
                                                     @endif
                                                 @endforeach
@@ -120,16 +120,16 @@
                                     <div class="col-md-4 col-sm-6">
                                         <div class="product">
                                             <div class="image">
-                                                <a href="/arrow/shop/products/{{ $p->id }}">
+                                                <a href="/arrow/shop/products/{{ $p->slug }}">
                                                     <img src="{{ asset('img/product1.jpg' ) }}" alt="" class="img-responsive image1">
                                                 </a>
                                             </div>
                                             <!-- /.image -->
                                             <div class="text">
-                                                <h3><a href="/arrow/shop/products/{{ $p->id }}">{{ $p->name }}</a></h3>
+                                                <h3><a href="/arrow/shop/products/{{ $p->slug }}">{{ $p->name }}</a></h3>
                                                 <p class="price">$ {{ $p->price }}</p>
                                                 <p class="buttons">
-                                                    <a href="/arrow/shop/products/{{ $p->id }}" class="btn btn-default">View detail</a>
+                                                    <a href="/arrow/shop/products/{{ $p->slug }}" class="btn btn-default">View detail</a>
                                                     <a href="shop-basket.html" class="btn btn-template-main"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                 </p>
                                             </div>

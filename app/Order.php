@@ -16,6 +16,18 @@ class Order extends Model
      */
     protected $dates = ['deleted_at'];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'is_payment_complete',
+        'discount',
+        'price',
+    ];
+
     public function products()
     {
         return $this->belongsToMany(Product::class)
