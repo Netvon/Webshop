@@ -8,7 +8,7 @@
     </div>
 
     <div class="panel-body">
-        <form action="/search" method="post">
+        <form action="{{ URL::action('ProductController@search') }}" method="post">
             <div class="input-group">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="text" class="form-control" name="body" placeholder="Search">

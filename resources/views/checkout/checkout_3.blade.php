@@ -7,9 +7,7 @@
                     <div class="col-md-7">
                         <h1>Checkout - Payment method</h1>
                     </div>
-                    <div class="col-md-5">
-                        @include('arrow.partials._breadcrumbs', ['breadcrumbs' => ['ArrowController@index' => 'home', 'CategoryController@index' => 'shop', '0' => 'checkout']])
-                    </div>
+                    @include('arrow.partials._breadcrumbs', ['breadcrumbs' => ['ArrowController@index' => 'home', 'CategoryController@index' => 'shop', '0' => 'checkout']])
                 </div>
             </div>
         </div>

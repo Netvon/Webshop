@@ -108,12 +108,20 @@ class Cart
 
         $products_amount = $this->products();
 
+        $total_price = 0;
+
+        foreach ($products_amount as $pa) {
+            $product = $pa['product'];
+
+            $total_price += $product->price;
+        }
+
         /** @var Order $order */
         $order = Order::create([
             'user_id'             => auth()->user()->id,
             'is_payment_complete' => false,
             'discount'            => 0,
-            'price'               => 0,
+            'price'               => $total_price,
         ]);
 
         foreach ($products_amount as $pa) {
@@ -121,8 +129,9 @@ class Cart
             $quantity = $pa['quantity'];
 
             $order->products()->attach($product->id, ['quantity' => $quantity]);
-        }
 
+        }
+        
         $this->remove_all();
 
         return $order;

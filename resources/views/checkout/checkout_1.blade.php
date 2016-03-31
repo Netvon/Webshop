@@ -7,9 +7,7 @@
                     <div class="col-md-7">
                         <h1>Checkout - Address</h1>
                     </div>
-                    <div class="col-md-5">
-                        @include('arrow.partials._breadcrumbs', ['breadcrumbs' => ['ArrowController@index' => 'home', 'CategoryController@index' => 'shop', '0' => 'checkout']])
-                    </div>
+                    @include('arrow.partials._breadcrumbs', ['breadcrumbs' => ['ArrowController@index' => 'home', 'CategoryController@index' => 'shop', '0' => 'checkout']])
                 </div>
             </div>
         </div>
@@ -22,10 +20,10 @@
                     <div class="col-md-9 clearfix" id="checkout">
 
                         <div class="box">
-                            <form method="post" action="shop-checkout2.html">
+                            <form method="post" action="{{ URL::action('OrderController@delivery') }}">
 
                                 <ul class="nav nav-pills nav-justified">
-                                    <li class="active"><a href="#"><i class="fa fa-map-marker"></i><br>Address</a>
+                                    <li class="active"><a><i class="fa fa-map-marker"></i><br>Address</a>
                                     </li>
                                     <li class="disabled"><a href="#"><i class="fa fa-truck"></i><br>Delivery Method</a>
                                     </li>
@@ -113,7 +111,7 @@
 
                                 <div class="box-footer">
                                     <div class="pull-left">
-                                        <a href="shop-basket.html" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
+                                        <a href="{{ URL::action('CartController@index') }}" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
                                     </div>
                                     <div class="pull-right">
                                         <button type="submit" class="btn btn-template-main">Continue to Delivery Method<i class="fa fa-chevron-right"></i>
@@ -141,11 +139,11 @@
                                     <tbody>
                                         <tr>
                                             <td>Order subtotal</td>
-                                            <th>$446.00</th>
+                                            <th>$ {{ $order->price }}</th>
                                         </tr>
                                         <tr>
                                             <td>Shipping and handling</td>
-                                            <th>$10.00</th>
+                                            <th>$ 0.00</th>
                                         </tr>
                                         <tr>
                                             <td>Tax</td>
@@ -153,7 +151,7 @@
                                         </tr>
                                         <tr class="total">
                                             <td>Total</td>
-                                            <th>$456.00</th>
+                                            <th>$ {{ $order->price }}</th>
                                         </tr>
                                     </tbody>
                                 </table>

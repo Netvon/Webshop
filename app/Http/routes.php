@@ -17,7 +17,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('cart', 'CartController@store');
     Route::delete('cart', 'CartController@destroy');
     Route::get('cart/order', 'CartController@order');
-    Route::get('order', 'OrderController@index');
+    Route::get('order/address', 'OrderController@index');
+    Route::get('order/delivery', 'OrderController@delivery');
     
     Route::group(['prefix' => 'manage', 'middleware' => 'role:admin'], function () {
 
