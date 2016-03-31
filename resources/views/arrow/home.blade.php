@@ -54,23 +54,28 @@ _________________________________________________________ -->
                         <img class="img-responsive" src="{{ asset('img/main-slider4.jpg') }}" alt="">
                 </div>
                 <div class="item">
-                    <div class="row">
+                    <a href="{{ URL::action('ProductController@show', $product_showcase->slug) }}"><div class="row">
                         <div class="col-sm-5 right">
                             <h1>
                             @if ($product_showcase != NULL)
-                                {{ $product_showcase->name }}
+                                    {{ $product_showcase->name }}
                             </h1>
                             <p>
-                                TODO: Description
                                 {{ $product_showcase->description_long }}
                             </p>
+                            <h1>
+                                $ {{ $product_showcase->price }}
+                            </h1>
                         </div>
                         <div class="col-sm-7">
-                            TODO: Image
-                            <img class="img-responsive" src="{{ asset('img/' . $product_showcase->images ) }}" alt="">
+                            @if ($product_showcase->images_by_type('thumbnail')->first() != NULL)
+                                <img class="img-responsive" src="{{ asset($product_showcase->images_by_type('thumbnail')->first()->image_uri) }}" alt="{{ $product_showcase->name }}">
+                            @else
+                                <img class="img-responsive" src="{{ asset('img/texture-bw.png') }}" alt="{{ $product_showcase->name }}">
+                            @endif
                             @endif
                         </div>
-                    </div>
+                    </div></a>
                 </div>
             </div>
             <!-- /.project owl-slider -->
