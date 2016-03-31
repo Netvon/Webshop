@@ -76,6 +76,32 @@ class ProductController extends Controller
 //        dd($request->all());
         $product->update($request->all());
 
+        if (!$request->has('is_in_stock')) {
+            $product->is_in_stock = false;
+        } else {
+            $product->is_in_stock = true;
+        }
+
+        if ($request->hasFile('image')) {
+            $product_images = $product->images_by_type('image');
+
+            if (count($product_images->toArray()) > 0) {
+                $this->deleteExistingImage($product_images->first());
+            }
+
+            $this->createProductImage($request->file('image'), $product);
+        }
+        if ($request->hasFile('thumbnail')) {
+
+            $product_images = $product->images_by_type('thumbnail');
+
+            if (count($product_images->toArray()) > 0) {
+                $this->deleteExistingImage($product_images->first());
+            }
+
+            $this->createProductImage($request->file('thumbnail'), $product, 'THUMBNAIL');
+        }
+
 //        dd($request->input('tag_list'));
 
         if (array_key_exists('tag_list', $request->all())) {
@@ -140,5 +166,14 @@ class ProductController extends Controller
         $new_image->image_uri = $final_path;
         $new_image->image_type = $image_type;
         $product->images()->save($new_image);
+    }
+
+    /**
+     * @param ProductImage $product_image
+     */
+    private function deleteExistingImage($product_image)
+    {
+        unlink(public_path() . $product_image->image_uri);
+        $product_image->forceDelete();
     }
 }

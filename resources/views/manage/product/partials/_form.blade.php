@@ -36,7 +36,11 @@
         </div>
         <div class="form-group">
             {!! Form::label('is_in_stock', trans('product.is_in_stock')) !!}
-            {!! Form::checkbox('is_in_stock', null, ['class' => 'form-control']) !!}
+            @if(isset($product))
+                {!! Form::checkbox('is_in_stock', $product->is_in_stock, $product->is_in_stock) !!}
+            @else
+                {!! Form::checkbox('is_in_stock') !!}
+            @endif
         </div>
     </div>
 </div>
@@ -76,6 +80,24 @@
 <div class="panel panel-default">
     <div class="panel-heading">Other</div>
     <div class="panel-body">
+        @if(isset($product))
+            <div class="row well">
+                @if (!is_null($product->images_by_type('thumbnail')->first()))
+                    <div class="col-xs-3">
+                        <strong>Thumbnail</strong>
+                        <img src="{{ asset($product->images_by_type('thumbnail')->first()->image_uri) }}"
+                             class="img-responsive" alt="Thumbnail">
+                    </div>
+                @endif
+                @if (!is_null($product->images_by_type('detail')->first()))
+                    <div class="col-xs-3">
+                        <strong>Detail</strong>
+                        <img src="{{ asset($product->images_by_type('detail')->first()->image_uri) }}"
+                             class="img-responsive" alt="Detail">
+                    </div>
+                @endif
+            </div>
+        @endif
         <div class="form-group">
             {!! Form::label('thumbnail', trans('product.pick_thumbnail')) !!}
             {!! Form::file('thumbnail', ['class' => 'form-control']) !!}

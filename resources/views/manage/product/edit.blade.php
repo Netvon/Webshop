@@ -7,7 +7,7 @@
 @endsection
 
 @section('page_content')
-    {!! Form::model($product, ['method' => 'PATCH', 'action' => ['Manage\ProductController@update', $product->id]]) !!}
+    {!! Form::model($product, ['method' => 'PATCH', 'action' => ['Manage\ProductController@update', $product->id], 'files' => true]) !!}
     @include('manage.product.partials._form', ['submitButtonText' => trans('product.edit_action')])
     {!! Form::close() !!}
 @endsection
