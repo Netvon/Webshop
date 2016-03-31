@@ -12,4 +12,5 @@ return [
     'softdelete_action' => 'Hide Category',
     'restore_action'    => 'Restore Category',
     'index_title'       => 'Categories',
+    'no_products'       => 'This Category has no products.',
 ];

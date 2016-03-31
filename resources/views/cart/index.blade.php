@@ -24,9 +24,12 @@
                         @foreach($cart as $pq)
                             <tr>
                                 <td>
-                                    <a href="{{ URL::action('ProductController@show', ['products' => $pq['product']->slug]) }}">
-                                        <img alt="{{ $pq['product']->name }}">
-                                    </a>
+                                    @if(count($pq['product']->images_by_type('thumbnail')) > 0)
+                                        <a href="{{ URL::action('ProductController@show', ['products' => $pq['product']->slug]) }}">
+                                            <img src="{{ $pq['product']->images_by_type('thumbnail')->first()->image_uri }}"
+                                                 alt="{{ $pq['product']->name }}">
+                                        </a>
+                                    @endif
                                 </td>
                                 <td>
                                     <a href="{{ URL::action('ProductController@show', ['products' => $pq['product']->slug]) }}">

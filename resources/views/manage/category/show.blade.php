@@ -74,7 +74,7 @@
         </div>
     @else
         <div class="alert alert-info">
-            Geen producten gevonden.
+            {{  trans('category.no_products') }}
         </div>
     @endif
 @endsection
