@@ -24,8 +24,29 @@ class TagRequest extends Request
      */
     public function rules()
     {
-        return [
-            'name' => 'required|min:2|unique:tags',
-        ];
+        $tag = $this->tags;
+
+        switch($this->method())
+        {
+            case 'GET':
+            case 'DELETE':
+            {
+                return [];
+            }
+            case 'POST':
+            {
+                return [
+                    'name' => 'required|min:2|unique:tags,name',
+                ];
+            }
+            case 'PUT':
+            case 'PATCH':
+            {
+                return [
+                    'name' => 'required|min:2|unique:tags,name,'.$tag->id,
+                ];
+            }
+            default:break;
+        }
     }
 }

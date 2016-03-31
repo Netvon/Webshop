@@ -23,9 +23,33 @@ class CategoryRequest extends Request
      */
     public function rules()
     {
-        return [
-            'name' => 'required|min:3|unique:categories',
-            'description' => 'required',
-        ];
+        $category = $this->categories;
+
+        switch($this->method())
+        {
+            case 'GET':
+            case 'DELETE':
+            {
+                return [];
+            }
+            case 'POST':
+            {
+                return [
+                    'name' => 'required|min:3|unique:categories,name',
+                    'description' => 'required',
+                ];
+            }
+            case 'PUT':
+            case 'PATCH':
+            {
+                return [
+                    'name' => 'required|min:3|unique:categories,name,'.$category->id,
+                    'description' => 'required',
+                ];
+            }
+            default:break;
+        }
+
+
     }
 }
