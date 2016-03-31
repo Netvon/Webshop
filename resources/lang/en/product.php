@@ -18,4 +18,6 @@ return [
     'softdelete_action'     => 'Hide Product',
     'restore_action'        => 'Restore Product',
     'flash_created'         => 'Product \':name\' successfully created',
+    'pick_thumbnail'        => 'Choose a Thumbnail image',
+    'pick_image'            => 'Choose an image',
 ];

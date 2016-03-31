@@ -3,7 +3,7 @@
     <div class="panel-body">
         <div class="form-group">
             {!! Form::label('category_id', trans('product.category')) !!}
-            @if(isset($create_in_category) && !$create_in_category)
+            @if((isset($create_in_category) && !$create_in_category) || !isset($product))
                 <select class="form-control" name="category_id" id="categories_list">
                     @foreach(\App\Category::all() as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -19,7 +19,7 @@
             <div class="col-md-10">
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     {!! Form::label('name', trans('product.name')) !!}
-                    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
                     @include('errors.block', ['field_name' => 'name'])
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     {!! Form::label('price', trans('product.price')) !!}
                     <div class="input-group">
                         <div class="input-group-addon">€</div>
-                        {!! Form::number('price', null, ['class' => 'form-control']) !!}
+                        {!! Form::number('price', null, ['class' => 'form-control', 'required', 'step' => 0.01, 'min' => 0]) !!}
                     </div>
                     @include('errors.block', ['field_name' => 'price'])
                 </div>
@@ -45,12 +45,12 @@
     <div class="panel-body">
         <div class="form-group{{ $errors->has('description_short') ? ' has-error' : '' }}">
             {!! Form::label('description_short', trans('product.description_short')) !!}
-            {!! Form::text('description_short', null, ['class' => 'form-control']) !!}
+            {!! Form::text('description_short', null, ['class' => 'form-control', 'required']) !!}
             @include('errors.block', ['field_name' => 'description_short'])
         </div>
         <div class="form-group{{ $errors->has('description_long') ? ' has-error' : '' }}">
             {!! Form::label('description_long', trans('product.description_long')) !!}
-            {!! Form::textarea('description_long', null, ['class' => 'form-control']) !!}
+            {!! Form::textarea('description_long', null, ['class' => 'form-control', 'required']) !!}
             @include('errors.block', ['field_name' => 'description_long'])
         </div>
     </div>
@@ -77,8 +77,13 @@
     <div class="panel-heading">Other</div>
     <div class="panel-body">
         <div class="form-group">
-            {!! Form::label('image', 'Choose an image') !!}
-            {!! Form::file('image[]', ['multiple', 'class' => 'form-control']) !!}
+            {!! Form::label('thumbnail', trans('product.pick_thumbnail')) !!}
+            {!! Form::file('thumbnail', ['class' => 'form-control']) !!}
+        </div>
+
+        <div class="form-group">
+            {!! Form::label('image', trans('product.pick_image')) !!}
+            {!! Form::file('image', ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">

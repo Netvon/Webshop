@@ -15,7 +15,6 @@ class CreateProductImagesTable extends Migration
         Schema::create('product_images', function (Blueprint $table) {
             $table->increments('id');
             $table->string('image_uri');
-            $table->string('annotation');
             $table->integer('product_id', false, true);
             $table->enum('image_type', ['thumbnail', 'detail']);
             $table->timestamps();
@@ -34,6 +33,6 @@ class CreateProductImagesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('product_images');
     }
 }

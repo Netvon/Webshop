@@ -17,6 +17,8 @@ use Request;
 
 class ProductController extends Controller
 {
+    const PRODUCT_IMAGES_FOLDER = '/productimages/';
+
     public function index()
     {
         return view('manage.product.index');
@@ -47,23 +49,11 @@ class ProductController extends Controller
             $product->tags()->attach($input['tag_list']);
         }
 
-//        dd($request->file('image'));
-
         if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $file) {
-                $basename = $file->getClientOriginalName();
-                $extension = $file->getClientOriginalExtension();
-                $filename = basename($basename, '.' . $extension);
-                $name = md5($filename . Carbon::now()->toDateTimeString());
-                $final_path = '/productimages/' . $name . '.' . $extension;
-                $file->move(public_path() . '/productimages/', $name . '.' . $extension);
-
-                $new_image = new ProductImage();
-                $new_image->image_uri = $final_path;
-                $new_image->annotation = 'test';
-                $new_image->image_type = 'DETAIL';
-                $product->images()->save($new_image);
-            }
+            $this->createProductImage($request->file('image'), $product);
+        }
+        if ($request->hasFile('thumbnail')) {
+            $this->createProductImage($request->file('thumbnail'), $product, 'THUMBNAIL');
         }
 
         if (array_key_exists('spec', $input)) {
@@ -131,5 +121,24 @@ class ProductController extends Controller
         $product->restore();
 
         return redirect()->action('Manage\ProductController@index');
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $image
+     * @param Product $product
+     */
+    private function createProductImage($image, $product, $image_type = 'DETAIL')
+    {
+        $basename = $image->getClientOriginalName();
+        $extension = $image->getClientOriginalExtension();
+        $filename = basename($basename, '.' . $extension);
+        $name = md5($filename . Carbon::now()->toDateTimeString());
+        $final_path = self::PRODUCT_IMAGES_FOLDER . $name . '.' . $extension;
+        $image->move(public_path() . self::PRODUCT_IMAGES_FOLDER, $name . '.' . $extension);
+
+        $new_image = new ProductImage();
+        $new_image->image_uri = $final_path;
+        $new_image->image_type = $image_type;
+        $product->images()->save($new_image);
     }
 }
