@@ -16,6 +16,7 @@ class CreateShippingListingsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('name');
+            $table->string('street');
             $table->string('city');
             $table->string('country');
             $table->string('postal_code');

@@ -18,7 +18,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::delete('cart', 'CartController@destroy');
     Route::get('cart/order', 'CartController@order');
     Route::get('order/address', 'OrderController@index');
-    Route::get('order/delivery', 'OrderController@delivery');
+    Route::get('order/review-know-customer', 'OrderController@review_known_customer');
+    Route::post('order/review-new-customer', 'OrderController@review_new_customer');
+    Route::post('order/success', 'OrderController@success');
     
     Route::group(['prefix' => 'manage', 'middleware' => 'role:admin'], function () {
 

@@ -12,7 +12,7 @@ class ShippingListing extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'city', 'country', 'postal_code',
+        'name', 'street', 'city', 'country', 'postal_code',
     ];
 
     public function user()

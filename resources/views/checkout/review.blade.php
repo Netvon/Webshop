@@ -20,15 +20,12 @@
                     <div class="col-md-9 clearfix" id="checkout">
 
                         <div class="box">
-                            <form method="post" action="shop-checkout4.html">
+                            <form method="post" action="{{ URL::action('OrderController@success') }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <ul class="nav nav-pills nav-justified">
-                                    <li><a href="shop-checkout1.html"><i class="fa fa-map-marker"></i><br>Address</a>
+                                    <li><a><i class="fa fa-map-marker"></i><br>Address</a>
                                     </li>
-                                    <li><a href="shop-checkout2.html"><i class="fa fa-truck"></i><br>Delivery Method</a>
-                                    </li>
-                                    <li><a href="shop-checkout3.html"><i class="fa fa-money"></i><br>Payment Method</a>
-                                    </li>
-                                    <li class="active"><a href="#"><i class="fa fa-eye"></i><br>Order Review</a>
+                                    <li class="active"><a><i class="fa fa-eye"></i><br>Order Review</a>
                                     </li>
                                 </ul>
 
@@ -37,45 +34,38 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th colspan="2">Product</th>
+                                                    <th colspan="3">Product</th>
                                                     <th>Quantity</th>
                                                     <th>Unit price</th>
-                                                    <th>Discount</th>
                                                     <th>Total</th>
                                                 </tr>
                                             </thead>
+
                                             <tbody>
+
+                                            @foreach($order->products as $p)
                                                 <tr>
-                                                    <td>
-                                                        <a href="#">
-                                                            <img src="img/detailsquare.jpg" alt="White Blouse Armani">
-                                                        </a>
+                                                    {{--<td>--}}
+                                                        {{--<a>--}}
+                                                            {{--@if ($r['product']->images_by_type('thumbnail')->first() != NULL)--}}
+                                                                {{--<img src="{{ asset($r['product']->images_by_type('thumbnail')->first()->image_uri) }}" alt="{{ $r['product']->name }}">--}}
+                                                            {{--@else--}}
+                                                                {{--<img src="{{ asset('img/texture-bw.png') }}" alt="{{ $r['product']->name }}">--}}
+                                                            {{--@endif--}}
+                                                        {{--</a>--}}
+                                                    {{--</td>--}}
+                                                    <td colspan="3"><a href="{{ URL::action('ProductController@show', $p->slug) }}">{{ $p->name }}</a>
                                                     </td>
-                                                    <td><a href="#">White Blouse Armani</a>
-                                                    </td>
-                                                    <td>2</td>
-                                                    <td>$123.00</td>
-                                                    <td>$0.00</td>
-                                                    <td>$246.00</td>
+                                                    <td>{{ $p->pivot->quantity }}</td>
+                                                    <td>$ {{ $p->price }}</td>
+                                                    <td>$ {{ ($p->price * $p->pivot->quantity)}}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#">
-                                                            <img src="img/basketsquare.jpg" alt="Black Blouse Armani">
-                                                        </a>
-                                                    </td>
-                                                    <td><a href="#">Black Blouse Armani</a>
-                                                    </td>
-                                                    <td>1</td>
-                                                    <td>$200.00</td>
-                                                    <td>$0.00</td>
-                                                    <td>$200.00</td>
-                                                </tr>
+                                            @endforeach
                                             </tbody>
                                             <tfoot>
                                                 <tr>
                                                     <th colspan="5">Total</th>
-                                                    <th>$446.00</th>
+                                                    <th>$ {{ $order->price }}</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -87,7 +77,7 @@
 
                                 <div class="box-footer">
                                     <div class="pull-left">
-                                        <a href="shop-checkout3.html" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Payment method</a>
+                                        <a href="{{ URL::action('OrderController@index') }}" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Shipping Address</a>
                                     </div>
                                     <div class="pull-right">
                                         <button type="submit" class="btn btn-template-main">Place an order<i class="fa fa-chevron-right"></i>
@@ -115,11 +105,11 @@
                                     <tbody>
                                         <tr>
                                             <td>Order subtotal</td>
-                                            <th>$446.00</th>
+                                            <th>$ {{ $order->price }}</th>
                                         </tr>
                                         <tr>
                                             <td>Shipping and handling</td>
-                                            <th>$10.00</th>
+                                            <th>$0.00</th>
                                         </tr>
                                         <tr>
                                             <td>Tax</td>
@@ -127,7 +117,7 @@
                                         </tr>
                                         <tr class="total">
                                             <td>Total</td>
-                                            <th>$456.00</th>
+                                            <th>$ {{ $order->price }}</th>
                                         </tr>
                                     </tbody>
                                 </table>
