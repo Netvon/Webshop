@@ -111,7 +111,7 @@ _________________________________________________________ -->
                 </div>
                 <div class="col-md-4">
                     <div class="box-simple">
-                        <a href="/arrow/contact"><div class="icon">
+                        <a href="{{ URL::action('ArrowController@contact') }}"><div class="icon">
                             <i class="fa fa-envelope-o"></i>
                         </div></a>
                         <h3>Contact</h3>
