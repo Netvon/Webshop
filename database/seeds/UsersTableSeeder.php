@@ -35,5 +35,13 @@ class UsersTableSeeder extends Seeder
             'role' => 'normal',
             'created_at' => Carbon::now()->toDateTimeString(),
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('admin'),
+            'role' => 'admin',
+            'created_at' => Carbon::now()->toDateTimeString(),
+        ]);
     }
 }
