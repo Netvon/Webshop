@@ -124,6 +124,24 @@ class RouteServiceProvider extends ServiceProvider
 
             return $blog;
         });
+
+        $router->bind('trashedproducts', function($idOrSlug)
+        {
+            $products = Product::withTrashed()->get();
+
+            $product = null;
+
+            foreach ($products as $c) {
+                if ($c->id == $idOrSlug || $c->slug == $idOrSlug)
+                    $product = $c;
+            }
+
+            if (!$product) {
+                abort(404);
+            }
+
+            return $product;
+        });
     }
 
     /**

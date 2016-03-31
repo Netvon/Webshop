@@ -1,5 +1,11 @@
 @extends('layouts.arrow_page', ['page_title' => trans('blog.edit_title')])
 
+@section('page_breadcrumbs')
+    @include('manage.partials._breadcrumb')
+    <li>{!! Html::linkAction('Manage\BlogController@index', trans('blog.index_title')) !!}</li>
+    <li>{{ trans('blog.edit_title') }}</li>
+@endsection
+
 @section('page_content')
 
     {{--    <h2>{{ trans('category.edit_title') }}</h2>--}}

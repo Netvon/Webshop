@@ -26,13 +26,14 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('categories/create/in-category/{categories}', 'Manage\CategoryController@create_in_category');
 
         Route::resource('categories', 'Manage\CategoryController');
-        Route::resource('products', 'Manage\ProductController');
+        Route::resource('products', 'Manage\ProductController', ['except' => 'show']);
         Route::resource('tags', 'Manage\TagController', ['except' => 'create']);
         Route::resource('blogs', 'Manage\BlogController', ['except' => 'show']);
 
         Route::patch('tags/restore/{trashedtags}', 'Manage\TagController@restore');
         Route::patch('categories/restore/{trashedcategories}', 'Manage\CategoryController@restore');
         Route::patch('blogs/restore/{trashedblogs}', 'Manage\BlogController@restore');
+        Route::patch('products/restore/{trashedproducts}', 'Manage\ProductController@restore');
     });
 
     Route::get('manage', 'Manage\ManageController@index');

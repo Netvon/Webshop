@@ -2,6 +2,7 @@
 
 @section('page_breadcrumbs')
     @include('manage.partials._breadcrumb')
+    <li>{!! Html::linkAction('Manage\ProductController@index', 'Products') !!}</li>
     <li>{{ trans('product.edit_title') }}</li>
 @endsection
 

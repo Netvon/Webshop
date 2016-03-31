@@ -1,5 +1,10 @@
 @extends('layouts.arrow_page', ['page_title' => trans('blog.index_title')])
 
+@section('page_breadcrumbs')
+    @include('manage.partials._breadcrumb')
+    <li>{{ trans('blog.index_title') }}</li>
+@endsection
+
 @section('page_content')
 
     <div class="panel panel-default">

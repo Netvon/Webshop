@@ -1,5 +1,11 @@
 @extends('layouts.arrow_page', ['page_title' => trans('category.index_title')])
 
+@section('page_breadcrumbs')
+    @include('manage.partials._breadcrumb')
+    <li>{{ trans('category.index_title') }}</li>
+@endsection
+
+
 @section('page_content')
     {{--<div class="page-header">--}}
         {{--<h2>{{ trans('category.index_title') }}</h2>--}}

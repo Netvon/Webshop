@@ -17,14 +17,9 @@ use Request;
 
 class ProductController extends Controller
 {
-    /**
-     * @param Product $product
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function show(Product $product)
+    public function index()
     {
-        
-        return view('manage.product.show', compact('product'));
+        return view('manage.product.index');
     }
 
     public function create()
@@ -82,7 +77,7 @@ class ProductController extends Controller
 
         flash(trans('product.flash_created', ['name' => $product->name]), 'success');
 
-        return redirect()->action('Manage\ManageController@index');
+        return redirect()->action('Manage\ProductController@index');
     }
 
     public function update(Product $product, ProductRequest $request)
@@ -100,15 +95,19 @@ class ProductController extends Controller
         }
 
 //        dd($request['spec']);
-
-        foreach ($request['spec'] as $key => $spec) {
-            $new_spec = Specification::firstOrNew(['id' => $key]);
-            $new_spec->name = $spec['name'];
-            $new_spec->value = $spec['value'];
-            $product->specifications()->save($new_spec);
+        if (array_key_exists('spec', $request->all())) {
+            foreach ($request['spec'] as $key => $spec) {
+                $new_spec = Specification::firstOrNew(['id' => $key]);
+                $new_spec->name = $spec['name'];
+                $new_spec->value = $spec['value'];
+                $product->specifications()->save($new_spec);
+            }
         }
 
-        return Redirect::action('Manage\ProductController@show', $product->slug);
+        $product->resluggify();
+        $product->save();
+
+        return Redirect::action('Manage\ProductController@index');
     }
 
     public function edit(Product $product)
@@ -125,5 +124,12 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->action('Manage\ManageController@index');
+    }
+
+    public function restore(Product $product)
+    {
+        $product->restore();
+
+        return redirect()->action('Manage\ProductController@index');
     }
 }

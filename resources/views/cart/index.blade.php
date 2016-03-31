@@ -34,26 +34,31 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <div class="form-control">{{ $pq['quantity'] }}</div>
-                                    {!! Form::open(['action' => ['CartController@store'], 'class' => 'form-inline']) !!}
-                                    {!! Form::hidden('product_id', $pq['product']->id) !!}
-                                    {!! Form::hidden('quantity', $pq['quantity'] + 1) !!}
-                                    <button type="submit"><i class="fa fa-plus"></i></button>
-                                    {!! Form::close() !!}
-                                    @if($pq['quantity'] > 1)
-                                        {!! Form::open(['action' => ['CartController@store'], 'class' => 'form-inline']) !!}
+                                    <div class="row">
+                                        <div class="col-xs-6">{{ $pq['quantity'] }}</div>
+                                        {!! Form::open(['action' => ['CartController@store'], 'class' => 'col-xs-2']) !!}
                                         {!! Form::hidden('product_id', $pq['product']->id) !!}
-                                        {!! Form::hidden('quantity', $pq['quantity'] - 1) !!}
-                                        <button type="submit"><i class="fa fa-minus"></i></button>
+                                        {!! Form::hidden('quantity', $pq['quantity'] + 1) !!}
+                                        <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-plus"></i>
+                                        </button>
                                         {!! Form::close() !!}
-                                    @endif
+                                        @if($pq['quantity'] > 1)
+                                            {!! Form::open(['action' => ['CartController@store'], 'class' => 'col-xs-2']) !!}
+                                            {!! Form::hidden('product_id', $pq['product']->id) !!}
+                                            {!! Form::hidden('quantity', $pq['quantity'] - 1) !!}
+                                            <button type="submit" class="btn btn-default btn-sm"><i
+                                                        class="fa fa-minus"></i></button>
+                                            {!! Form::close() !!}
+                                        @endif
+                                    </div>
                                 </td>
                                 <td>{{ '$'.$pq['product']->price }}</td>
                                 <td>{{ '$'.($pq['product']->price * $pq['quantity'])}}</td>
                                 <td>
                                     {!! Form::open(['method' => 'DELETE', 'action' => ['CartController@destroy'], 'class' => 'form-inline']) !!}
                                     {!! Form::hidden('product_id', $pq['product']->id) !!}
-                                    <button type="submit"><i class="fa fa-trash-o"></i></button>
+                                    <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i>
+                                    </button>
                                     {!! Form::close() !!}
                                 </td>
                             </tr>

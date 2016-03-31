@@ -1,5 +1,11 @@
 @extends('layouts.arrow_page', ['page_title' => $category->name])
 
+@section('page_breadcrumbs')
+    @include('manage.partials._breadcrumb')
+    <li>{!! Html::linkAction('Manage\CategoryController@index', trans('category.index_title')) !!}</li>
+    <li>{{ $category->name }}</li>
+@endsection
+
 @section('page_content')
     {{--<div class="page-header">--}}
     {{--<h2>{{ $category->name }}</h2>--}}
@@ -63,12 +69,7 @@
 
         <div class="list-group">
             @foreach($products as $product)
-                <a class="list-group-item"
-                   href="{{URL::action('Manage\ProductController@show', $product->slug)}}">
-                    <span class="badge">€{{ $product->price }}</span>
-                    <h4 class="list-group-item-heading">{{$product->name}}</h4>
-                    <p class="list-group-item-text">{{ $product->description_short }}</p>
-                </a>
+                @include('manage.product.partials._productListItem', ['product_item' => $product])
             @endforeach
         </div>
     @else

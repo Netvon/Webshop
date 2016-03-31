@@ -1,7 +1,8 @@
 @extends('layouts.arrow_page', ['page_title' => trans('tag.index_title')])
 
 @section('page_breadcrumbs')
-    <li><a href="/manage">Manage</a></li>
+    @include('manage.partials._breadcrumb')
+    <li>{{ trans('tag.index_title') }}</li>
 @endsection
 
 @section('page_content')
