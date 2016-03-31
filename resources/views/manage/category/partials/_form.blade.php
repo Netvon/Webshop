@@ -14,7 +14,7 @@
         <select class="form-control" name="parent">
             <option value="-1">--------</option>
             @foreach(\App\Category::all() as $parent)
-                @if(isset($create_in_category) && $create_in_category == $parent)
+                @if(isset($create_in_category) && $create_in_category === $parent)
                     <option value="{{ $parent->id }}" selected>{{ $parent->name }}</option>
                 @else
                     <option value="{{ $parent->id }}">{{ $parent->name }}</option>

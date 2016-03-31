@@ -34,7 +34,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('manage.category.create', ['create_in_category' => null]);
+        return view('manage.category.create', ['create_in_category' => '']);
     }
 
     public function create_in_category(Category $create_in_category)
