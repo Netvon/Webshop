@@ -74,6 +74,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="box">
+                                    @if($product->is_in_stock)
                                     {!! Form::open(['action' => 'CartController@store']) !!}
                                     {!! Form::hidden('product_id', $product->id) !!}
                                     <p class="price">$ {{ $product->price }}</p>
@@ -84,6 +85,9 @@
                                     </p>
 
                                     {!! Form::close() !!}
+                                    @else
+                                        <p class="price">$ {{ $product->price }}</p>
+                                    @endif
                                 </div>
                             </div>
 
