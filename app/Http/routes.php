@@ -31,6 +31,7 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::patch('tags/restore/{trashedtags}', 'Manage\TagController@restore');
         Route::patch('categories/restore/{trashedcategories}', 'Manage\CategoryController@restore');
+        Route::patch('blogs/restore/{trashedblogs}', 'Manage\BlogController@restore');
     });
 
     Route::get('manage', 'Manage\ManageController@index');

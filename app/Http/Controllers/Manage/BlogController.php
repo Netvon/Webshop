@@ -87,4 +87,11 @@ class BlogController extends Controller
 
         return redirect()->action('Manage\ManageController@index');
     }
+
+    public function restore(Blog $blog)
+    {
+        $blog->restore();
+
+        return redirect()->action('Manage\BlogController@index');
+    }
 }

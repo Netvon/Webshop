@@ -106,6 +106,24 @@ class RouteServiceProvider extends ServiceProvider
         {
             return Blog::findBySlugOrIdOrFail($idOrSlug);
         });
+
+        $router->bind('trashedblogs', function($idOrSlug)
+        {
+            $blogs = Blog::withTrashed()->get();
+
+            $blog = null;
+
+            foreach ($blogs as $c) {
+                if ($c->id == $idOrSlug || $c->slug == $idOrSlug)
+                    $blog = $c;
+            }
+
+            if (!$blog) {
+                abort(404);
+            }
+
+            return $blog;
+        });
     }
 
     /**
