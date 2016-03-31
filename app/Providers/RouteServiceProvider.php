@@ -23,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define your route model bindings, pattern filters, etc.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param  \Illuminate\Routing\Router $router
      * @return void
      */
     public function boot(Router $router)
@@ -32,122 +32,47 @@ class RouteServiceProvider extends ServiceProvider
 
         parent::boot($router);
 
-        $router->bind('products', function($idOrSlug)
-        {
-            $products = Product::with('tags', 'specifications', 'category', 'images')
-                ->get();
-
-            $product = null;
-
-            foreach ($products as $p) {
-                if ($p->id == $idOrSlug || $p->slug == $idOrSlug)
-                    $product = $p;
-            }
-
-            if (!$product) {
-                abort(404);
-            }
-
-            return $product;
+        $router->bind('products', function ($idOrSlug) {
+            return $this->getModelBySlugOrIdOrFail(Product::class, $idOrSlug);
         });
 
-        $router->bind('categories', function($idOrSlug)
-        {
-            return Category::findBySlugOrIdOrFail($idOrSlug);
+        $router->bind('categories', function ($idOrSlug) {
+            return $this->getModelBySlugOrIdOrFail(Category::class, $idOrSlug);
         });
 
-        $router->bind('tags', function($idOrSlug)
-        {
-            return Tag::findBySlugOrIdOrFail($idOrSlug);
+        $router->bind('tags', function ($idOrSlug) {
+            return $this->getModelBySlugOrIdOrFail(Tag::class, $idOrSlug);
         });
 
-        $router->bind('trashedtags', function($idOrSlug)
-        {
-            $tags = Tag::withTrashed()->get();
-
-            $tag = null;
-
-            foreach ($tags as $t) {
-                if ($t->id == $idOrSlug || $t->slug == $idOrSlug)
-                    $tag = $t;
-            }
-
-            if (!$tag) {
-                abort(404);
-            }
-
-            return $tag;
+        $router->bind('trashedtags', function ($idOrSlug) {
+            return $this->getModelBySlugOrIdOrFail(Tag::class, $idOrSlug, true);
         });
 
-        $router->bind('trashedcategories', function($idOrSlug)
-        {
-            $categories = Category::withTrashed()->get();
-
-            $category = null;
-
-            foreach ($categories as $c) {
-                if ($c->id == $idOrSlug || $c->slug == $idOrSlug)
-                    $category = $c;
-            }
-
-            if (!$category) {
-                abort(404);
-            }
-
-            return $category;
+        $router->bind('trashedcategories', function ($idOrSlug) {
+            return $this->getModelBySlugOrIdOrFail(Category::class, $idOrSlug, true);
         });
 
-        $router->bind('blogs', function($idOrSlug)
-        {
-            return Blog::findBySlugOrIdOrFail($idOrSlug);
+        $router->bind('blogs', function ($idOrSlug) {
+            return $this->getModelBySlugOrIdOrFail(Blog::class, $idOrSlug);
         });
 
-        $router->bind('blog', function($idOrSlug)
-        {
-            return Blog::findBySlugOrIdOrFail($idOrSlug);
+        $router->bind('blog', function ($idOrSlug) {
+            return $this->getModelBySlugOrIdOrFail(Blog::class, $idOrSlug);
         });
 
-        $router->bind('trashedblogs', function($idOrSlug)
-        {
-            $blogs = Blog::withTrashed()->get();
-
-            $blog = null;
-
-            foreach ($blogs as $c) {
-                if ($c->id == $idOrSlug || $c->slug == $idOrSlug)
-                    $blog = $c;
-            }
-
-            if (!$blog) {
-                abort(404);
-            }
-
-            return $blog;
+        $router->bind('trashedblogs', function ($idOrSlug) {
+            return $this->getModelBySlugOrIdOrFail(Product::class, $idOrSlug, true);
         });
 
-        $router->bind('trashedproducts', function($idOrSlug)
-        {
-            $products = Product::withTrashed()->get();
-
-            $product = null;
-
-            foreach ($products as $c) {
-                if ($c->id == $idOrSlug || $c->slug == $idOrSlug)
-                    $product = $c;
-            }
-
-            if (!$product) {
-                abort(404);
-            }
-
-            return $product;
+        $router->bind('trashedproducts', function ($idOrSlug) {
+            return $this->getModelBySlugOrIdOrFail(Product::class, $idOrSlug, true);
         });
     }
 
     /**
      * Define the routes for the application.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param  \Illuminate\Routing\Router $router
      * @return void
      */
     public function map(Router $router)
@@ -155,5 +80,37 @@ class RouteServiceProvider extends ServiceProvider
         $router->group(['namespace' => $this->namespace], function ($router) {
             require app_path('Http/routes.php');
         });
+    }
+
+
+    /**
+     * @param string $model
+     * @param $idOrSlug
+     * @param bool $include_trashed
+     * @return \Eloquent
+     */
+    private function getModelBySlugOrIdOrFail($model, $idOrSlug, $include_trashed = false)
+    {
+        $r = new \ReflectionClass($model);
+
+        /** @var \Eloquent $return_model */
+        $return_model = null;
+
+        if ($include_trashed) {
+            $trashed = $r->getMethod('withTrashed')->invoke(null)->get();
+
+            foreach ($trashed as $t) {
+                if ($t->id == $idOrSlug || $t->slug == $idOrSlug)
+                    $return_model = $t;
+            }
+
+            if (!$return_model) {
+                abort(404);
+            }
+        } else {
+            $return_model = $r->getMethod('findBySlugOrIdOrFail')->invoke(null, $idOrSlug);
+        }
+
+        return $return_model;
     }
 }
