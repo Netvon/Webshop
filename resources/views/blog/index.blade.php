@@ -58,7 +58,7 @@ _________________________________________________________ -->
                     </div>
 
                     <div class="panel-body text-widget">
-                        <p>Showing a blog of all the things that have been done to this webpage
+                        <p>Showing a blog of all the things we have been doing to this webpage
                         </p>
 
                     </div>
