@@ -13,6 +13,20 @@ class SpecificationsTableSeeder extends Seeder
     public function run()
     {
         DB::table('specifications')->insert([
+            'product_id' => '1',
+            'name' => 'Opslag',
+            'value' => '1 TB',
+            'created_at' => Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('specifications')->insert([
+            'product_id' => '6',
+            'name' => 'Opslag',
+            'value' => '500 GB',
+            'created_at' => Carbon::now()->toDateTimeString(),
+        ]);
+        
+        DB::table('specifications')->insert([
             'product_id' => '6',
             'name' => 'Opslag',
             'value' => '500 GB',
