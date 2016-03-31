@@ -82,33 +82,44 @@
         </div>
     </div>
 
-<div class="panel panel-default sidebar-menu">
+@if ($tags != NULL)
+    <div class="panel panel-default sidebar-menu">
 
-    <div class="panel-heading">
-        <h3 class="panel-title">Tags</h3>
-        <a class="btn btn-xs btn-danger pull-right" href="#"><i class="fa fa-times-circle"></i> <span class="hidden-sm">Clear</span></a>
-    </div>
+        <div class="panel-heading">
+            <h3 class="panel-title">Tags</h3>
+            <a class="btn btn-xs btn-danger pull-right" href="{{ URL::action('CategoryController@index') }}"><i class="fa fa-times-circle"></i> <span class="hidden-sm">Clear</span></a>
+        </div>
 
-    <div class="panel-body">
+        <div class="panel-body">
 
-        <form>
-            <div class="form-group">
-                @if ($tags != NULL)
+            <form action="{{ URL::action('ProductController@tag') }}" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+
                     @foreach($tags as $t)
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox">{{ $t->name }}
+                                <input type="checkbox" name="{{ $t->name }}" value="{{ $t->name }}"
+                                @if($filter_tags != NULL)
+                                    @foreach($filter_tags as $ft)
+                                        @if($t->name == $ft)
+                                            checked
+                                        @endif
+                                    @endforeach
+                                @endif
+                                > {{ $t->name }}
                             </label>
                         </div>
                     @endforeach
-                @endif
-            </div>
 
-            <button class="btn btn-default btn-sm btn-template-main"><i class="fa fa-pencil"></i> Apply</button>
+                </div>
 
-        </form>
+                <button class="btn btn-default btn-sm btn-template-main"><i class="fa fa-pencil"></i> Apply</button>
 
+            </form>
+
+        </div>
     </div>
-</div>
+@endif
 
 <!-- *** MENUS AND FILTERS END *** -->

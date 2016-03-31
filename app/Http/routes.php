@@ -52,6 +52,7 @@ Route::group(['middleware' => 'web'], function () {
     
     Route::get('blog', 'BlogController@index');
     Route::post('search', 'ProductController@search');
+    Route::post('tag', 'ProductController@tag');
 
     Route::resource('shop/categories', 'CategoryController');
     Route::resource('shop/products', 'ProductController');

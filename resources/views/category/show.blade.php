@@ -24,14 +24,7 @@
 
                 <div class="col-sm-3">
 
-                    @include('arrow.partials._filters', ['categories' => App\Category::with('children.children')->get(), 'category' => $category, 'product' => NULL, 'tags' => App\Tag::all()])
-
-                    {{--<div class="banner">--}}
-                    {{--<a href="shop-category.html">--}}
-                    {{--<img src="{{ asset('img/banner.jpg') }}" alt="sales 2014" class="img-responsive">--}}
-                    {{--</a>--}}
-                    {{--</div>--}}
-                    {{--<!-- /.banner -->--}}
+                    @include('arrow.partials._filters', ['categories' => App\Category::with('children.children')->get(), 'category' => $category, 'product' => NULL, 'tags' => App\Tag::all(), 'filter_tags' => NULL])
 
                 </div>
                 <!-- /.col-md-3 -->
@@ -44,32 +37,6 @@
                 <div class="col-sm-9">
 
                     @include('category.partials._product_list', ['products' => $category->products()->get()])
-
-
-                    {{--<div class="pages">--}}
-
-                    {{--<p class="loadMore">--}}
-                    {{--<a href="#" class="btn btn-template-main"><i class="fa fa-chevron-down"></i> Load more</a>--}}
-                    {{--</p>--}}
-
-                    {{--<ul class="pagination">--}}
-                    {{--<li><a href="#">&laquo;</a>--}}
-                    {{--</li>--}}
-                    {{--<li class="active"><a href="#">1</a>--}}
-                    {{--</li>--}}
-                    {{--<li><a href="#">2</a>--}}
-                    {{--</li>--}}
-                    {{--<li><a href="#">3</a>--}}
-                    {{--</li>--}}
-                    {{--<li><a href="#">4</a>--}}
-                    {{--</li>--}}
-                    {{--<li><a href="#">5</a>--}}
-                    {{--</li>--}}
-                    {{--<li><a href="#">&raquo;</a>--}}
-                    {{--</li>--}}
-                    {{--</ul>--}}
-                    {{--</div>--}}
-
 
                 </div>
                 <!-- /.col-md-9 -->

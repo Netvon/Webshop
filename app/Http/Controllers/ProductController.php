@@ -47,4 +47,41 @@ class ProductController extends Controller
 
 //        return $request->all();
     }
+    
+    public function tag(Request $request)
+    {
+        // Get all tags from form
+        $filter_tags = new \Illuminate\Database\Eloquent\Collection();
+        $filter_products = new \Illuminate\Database\Eloquent\Collection();
+        $x = 0;
+
+        foreach ($request->request as $tag)
+        {
+            if ($x > 0) {
+                $filter_tags->add($tag);
+            }
+            $x++;
+        }
+
+        $products = Product::all();
+
+        foreach ($products as $p)
+        {
+            $product_tags = $p->tags()->get();
+
+            foreach ($product_tags as $pt)
+            {
+                foreach ($filter_tags as $t)
+                {
+                    if ($pt->name == $t)
+                    {
+                        $filter_products->add($p);
+                        break 2;
+                    }
+                }
+            }
+        }
+
+        return view('category.tag', compact('filter_products', 'filter_tags'));
+    }
 }
