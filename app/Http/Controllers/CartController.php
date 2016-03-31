@@ -24,7 +24,7 @@ class CartController extends Controller
     {
         $cart = new Cart();
 //        $cart->push_product(1, 10);
-        return view('cart.index', ['cart' => $cart->products()]);
+        return view('cart.index', ['cart' => $cart->products(), 'total_price' => $cart->total_price()]);
     }
 
     public function destroy(Request $request)

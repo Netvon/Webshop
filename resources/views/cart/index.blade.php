@@ -70,7 +70,7 @@
                         <tfoot>
                         <tr>
                             <th colspan="5">Total</th>
-                            <th colspan="2">----</th>
+                            <th colspan="2">{{ '$'.$total_price }}</th>
                         </tr>
                         </tfoot>
                     </table>

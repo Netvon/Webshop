@@ -108,13 +108,7 @@ class Cart
 
         $products_amount = $this->products();
 
-        $total_price = 0;
-
-        foreach ($products_amount as $pa) {
-            $product = $pa['product'];
-
-            $total_price += $product->price;
-        }
+        $total_price = $this->total_price();
 
         /** @var Order $order */
         $order = Order::create([
@@ -131,10 +125,28 @@ class Cart
             $order->products()->attach($product->id, ['quantity' => $quantity]);
 
         }
-        
+
         $this->remove_all();
 
         return $order;
+    }
+
+    /**
+     * Returns total price of all products in cart
+     *
+     * @return int
+     */
+    public function total_price()
+    {
+        $total = 0;
+
+        $pa = $this->products();
+
+        foreach ($pa as $entry) {
+            $total += $entry['product']->price * $entry['quantity'];
+        }
+
+        return $total;
     }
 
     private function save_session()
