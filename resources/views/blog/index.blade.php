@@ -23,16 +23,16 @@
                         <section class="post">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h2><a href="post.htmls">{{ $b->title }}</a></h2>
+                                    <h2><a href="{{ URL::action('BlogController@show', $b->slug) }}">{{ $b->title }}</a></h2>
                                     <div class="clearfix">
-                                        <p class="author-category">By {AUTHOR}
+                                        <p class="author-category">By {{ $b->user()->first()->name }}
                                         </p>
                                         <p class="date-comments">
-                                            <a href="blog-post.html"><i class="fa fa-calendar-o"></i> {DATE}</a>
+                                            <i class="fa fa-calendar-o"></i> {{ $b->user()->first()->created_at }}
                                         </p>
                                     </div>
-                                    <p class="intro">{SHORT DESCRIPTION}</p>
-                                    <p class="read-more"><a href="{{ asset(URL::action('BlogController@show', $b->id)) }}" class="btn btn-template-main">Continue reading</a>
+                                    <p class="intro">{{ str_limit($b->body) }}</p>
+                                    <p class="read-more"><a href="{{ URL::action('BlogController@show', $b->slug) }}" class="btn btn-template-main">Continue reading</a>
                                     </p>
                                 </div>
                             </div>

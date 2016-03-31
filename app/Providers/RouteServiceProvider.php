@@ -101,6 +101,11 @@ class RouteServiceProvider extends ServiceProvider
         {
             return Blog::findBySlugOrIdOrFail($idOrSlug);
         });
+
+        $router->bind('blog', function($idOrSlug)
+        {
+            return Blog::findBySlugOrIdOrFail($idOrSlug);
+        });
     }
 
     /**
