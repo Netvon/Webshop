@@ -37,7 +37,9 @@ class ProductController extends Controller
 
     public function create_in_category(Category $create_in_category)
     {
-        return view('manage.product.create', compact('create_in_category'));
+        $tags = Tag::pluck('name', 'id');
+
+        return view('manage.product.create', compact('create_in_category', 'tags'));
     }
 
     public function store(ProductRequest $request)

@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
+    <!-- Select2 css -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" rel="stylesheet"/>
+
     <!-- Css animations  -->
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
 
@@ -67,11 +70,12 @@
         @include('arrow.footer')
     </div>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script>
-        window.jQuery || document.write('<script src="{{ asset('js/jquery-1.11.0.min.js') }}"><\/script>')
-    </script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+    {{--<script>--}}
+        {{--window.jQuery || document.write('<script src="{{ asset('js/jquery-1.11.0.min.js') }}"><\/script>')--}}
+    {{--</script>--}}
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
     <script src="{{ asset('js/jquery.cookie.js') }}"></script>
     <script src="{{ asset('js/waypoints.min.js') }}"></script>
@@ -81,7 +85,7 @@
 
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
 
-{{--    @yield('javascript')--}}
+    @yield('javascript')
 </body>
 
 </html>

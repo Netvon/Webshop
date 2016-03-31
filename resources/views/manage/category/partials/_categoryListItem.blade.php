@@ -9,11 +9,14 @@
                 @endif
             </h4>
             <p class="list-group-item-text text-muted">{{$cat_item->description}}</p>
-            <ul>
-                @foreach($cat_item->children() as $child)
-                    <li>{{ $child->name }}</li>
-                @endforeach
-            </ul>
+            @if(count($cat_item->children) > 0)
+                Sub-categories
+                <ul>
+                    @foreach($cat_item->children as $child)
+                        <li>{{ $child->name }}</li>
+                    @endforeach
+                </ul>
+            @endif
         </div>
 
         <div class="col-xs-3 pull-right">
