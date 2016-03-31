@@ -63,7 +63,19 @@
                                                         </li>
                                                         <li>USER
                                                             <ul>
-
+                                                                <li>Winkelwagen
+                                                                    <ul>
+                                                                        <li>Product toevoegen</li>
+                                                                        <li>Product verwijderen</li>
+                                                                        <li>Product aanpassen (hoeveelheid)</li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li>GENERAL
+                                                            <ul>
+                                                                <li>Laravel Setup (Local & Azure)</li>
+                                                                <li>Bug fixes hier en daar</li>
                                                             </ul>
                                                         </li>
                                                     </ul>
@@ -110,6 +122,11 @@
                                                                 </ul>
                                                                 <li>About Us</li>
                                                                 <li>Contact</li>
+                                                            </ul>
+                                                        </li>
+                                                        <li>GENERAL
+                                                            <ul>
+                                                                <li>Template gevonden en toegepast</li>
                                                             </ul>
                                                         </li>
                                                     </ul>
