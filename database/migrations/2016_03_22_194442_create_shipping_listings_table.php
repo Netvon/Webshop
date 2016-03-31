@@ -19,6 +19,7 @@ class CreateShippingListingsTable extends Migration
             $table->string('city');
             $table->string('country');
             $table->string('postal_code');
+            $table->timestamps();
 
             $table->foreign('user_id')
                 ->references('id')

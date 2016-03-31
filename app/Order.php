@@ -39,4 +39,9 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function shipping_listing()
+    {
+        return $this->hasOne(ShippingListing::class);
+    }
 }

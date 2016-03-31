@@ -2,28 +2,38 @@
 
 @section('page_content')
     {{--<div class="page-header">--}}
-        {{--<h2>{{ $category->name }}</h2>--}}
+    {{--<h2>{{ $category->name }}</h2>--}}
     {{--</div>--}}
     <p class="lead">{{ $category->description }}</p>
 
-    @if(auth()->check() && auth()->user()->role === 'admin')
-        <div class="panel panel-default">
-            <div class="panel-heading">Actions</div>
-            <div class="panel-body">
 
-                <div class="btn-group" role="group">
-                    <a class="btn btn-default"
-                       href="{{ URL::action('Manage\ProductController@create_in_category', $category->slug) }}">Add
-                        Product</a>
-                    <a class="btn btn-default"
-                       href="{{ URL::action('Manage\CategoryController@edit', $category->id) }}">Edit Category</a>
-                    <a class="btn btn-default"
-                       href="#">Hide Category</a>
-                </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Actions</div>
+        <div class="panel-body">
 
+            @if(!$category->trashed())
+                {!! Form::model($category, ['method' => 'DELETE', 'action' => ['Manage\CategoryController@destroy', $category->id]]) !!}
+            @else
+                {!! Form::model($category, ['method' => 'PATCH', 'action' => ['Manage\CategoryController@restore', $category->id]]) !!}
+            @endif
+            <div class="btn-group" role="group">
+                <a class="btn btn-default"
+                   href="{{ URL::action('Manage\ProductController@create_in_category', $category->slug) }}">Add
+                    Product</a>
+                <a class="btn btn-default"
+                   href="{{ URL::action('Manage\CategoryController@edit', $category->id) }}">Edit Category</a>
+                <button type="submit" class="btn btn-default">
+                    @if(!$category->trashed())
+                        {{ trans('category.softdelete_action') }}
+                    @else
+                        {{ trans('category.restore_action') }}
+                    @endif
+                </button>
             </div>
+            {{ Form::close() }}
+
         </div>
-    @endif
+    </div>
 
 
     <div class="panel panel-default">
