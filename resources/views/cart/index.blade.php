@@ -6,7 +6,7 @@
             <p class="text-muted lead">You currently have {{ count($cart) }} item(s) in your cart.</p>
         </div>
 
-        <div class="col-md-9 clearfix" id="basket">
+        <div class="col-md-12 clearfix" id="basket">
 
             <div class="box">
 
@@ -93,6 +93,7 @@
                 </div>
 
             </div>
+        </div>
     @else
         @include('notification.partials._alert', ['message' => trans('cart.empty'), 'message_level' => 'info'])
     @endif
