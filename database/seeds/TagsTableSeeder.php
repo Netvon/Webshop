@@ -29,5 +29,23 @@ class TagsTableSeeder extends Seeder
             'created_at' => Carbon::now()->toDateTimeString(),
             'slug' => 'rood',
         ]);
+
+        DB::table('tags')->insert([
+            'name' => 'blauw',
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'slug' => 'blauw',
+        ]);
+
+        DB::table('tags')->insert([
+            'name' => 'wit',
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'slug' => 'wit',
+        ]);
+
+        DB::table('tags')->insert([
+            'name' => 'groen',
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'slug' => 'groen',
+        ]);
     }
 }
