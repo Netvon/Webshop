@@ -24,7 +24,7 @@
 
                     <div class="col-sm-3">
 
-                        @include('arrow.partials._filters', ['categories' => App\Category::with('children.children')->get(), 'product' => $product, 'category' => NULL, 'tags' => App\Tag::all()])
+                        @include('arrow.partials._filters', ['categories' => App\Category::with('children.children')->get(), 'product' => $product, 'category' => NULL, 'tags' => App\Tag::all(), 'filter_tags' => NULL])
 
                         {{--<div class="banner">--}}
                             {{--<a href="shop-category.html">--}}

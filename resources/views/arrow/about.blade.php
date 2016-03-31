@@ -58,11 +58,12 @@
                                                                 <li>Categorie aanpassen</li>
                                                                 <li>Tags aanmaken</li>
                                                                 <li>Tags aanpassen</li>
+                                                                <li>Blog aanmaken/bekijken</li>
                                                             </ul>
                                                         </li>
                                                         <li>USER
                                                             <ul>
-                                                                <li>Blog aanmaken/bekijken</li>
+
                                                             </ul>
                                                         </li>
                                                     </ul>
@@ -89,11 +90,24 @@
                                                 <div class="col-md-8">
                                                     <ul>
                                                         <li>ADMIN</li>
+                                                            <ul>
+                                                                <li>Homepage</li>
+                                                            </ul>
                                                         <li>USER
                                                             <ul>
                                                                 <li>Homepage</li>
                                                                 <li>Product overzicht pagina</li>
+                                                                <li>Product zoekpagina</li>
+                                                                <li>Product tagpagina</li>
                                                                 <li>Product detail pagina</li>
+                                                                <li>Blog overzicht pagina</li>
+                                                                <li>Blog detail pagina</li>
+                                                                <li>Checkout process</li>
+                                                                <ul>
+                                                                    <li>Order address</li>
+                                                                    <li>Order review</li>
+                                                                    <li>Order success</li>
+                                                                </ul>
                                                                 <li>About Us</li>
                                                                 <li>Contact</li>
                                                             </ul>

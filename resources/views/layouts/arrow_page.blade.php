@@ -7,19 +7,14 @@
                 <div class="col-md-7">
                     <h1>{{ $page_title }}</h1>
                 </div>
-                <div class="col-md-5">
-                    <ul class="breadcrumb">
-                        @yield('page_breadcrumbs')
-                    </ul>
-
-                </div>
+                @include('arrow.partials._breadcrumbs', ['breadcrumbs' => ['ArrowController@index' => 'home', 'Manage\ManageController@index' => 'manage']])
             </div>
         </div>
     </div>
 
-    <div id="content" class="clearfix">
+    {{--<div id="content" class="clearfix">--}}
         <div class="container">
             @yield('page_content')
         </div>
-    </div>
+    {{--</div>--}}
 @endsection
