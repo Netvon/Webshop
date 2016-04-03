@@ -22,8 +22,9 @@
                 <div class="col-md-9" id="blog-post">
 
 
-                    <p class="text-muted text-uppercase mb-small text-right">By {{ $blog->user()->first()->name }} | {{ $blog->user()->first()->created_at }}</p>
-                    <p class="lead">{{ $blog->body }}</p>
+                    <p class="text-muted text-uppercase mb-small text-right">By {{ $blog->user()->first()->name }}
+                        | {{ $blog->user()->first()->created_at }}</p>
+                    {!! Markdown::convertToHtml($blog->body) !!}
 
                 </div>
                 <!-- /#blog-post -->

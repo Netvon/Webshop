@@ -25,9 +25,23 @@ class SpecificationsTableSeeder extends Seeder
         ]);
 
         DB::table('specifications')->insert([
+            'product_id' => $ps4,
+            'name' => 'GPU',
+            'value' => '1,84 TFLOPS',
+            'created_at' => Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('specifications')->insert([
             'product_id' => $xbox_one,
             'name' => 'Storage',
             'value' => '500 GB',
+            'created_at' => Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('specifications')->insert([
+            'product_id' => $xbox_one,
+            'name' => 'GPU',
+            'value' => '1,84 TFLOPS',
             'created_at' => Carbon::now()->toDateTimeString(),
         ]);
         
@@ -35,6 +49,13 @@ class SpecificationsTableSeeder extends Seeder
             'product_id' => $wii_u,
             'name' => 'Storage',
             'value' => '500 GB',
+            'created_at' => Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('specifications')->insert([
+            'product_id' => $wii_u,
+            'name' => 'GPU',
+            'value' => '1,84 TFLOPS',
             'created_at' => Carbon::now()->toDateTimeString(),
         ]);
 

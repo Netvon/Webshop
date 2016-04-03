@@ -27,9 +27,9 @@ class BlogTableSeeder extends Seeder
         ]);
 
 
-        \App\Blog::each(function (\App\Category $category) {
-            $category->sluggify();
-            $category->save();
+        \App\Blog::each(function (\App\Blog $blog) {
+            $blog->sluggify();
+            $blog->save();
         });
     }
 }

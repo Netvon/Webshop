@@ -50,7 +50,13 @@ class ProductTagSeeder extends Seeder
 
         DB::table('product_tag')->insert([
             'tag_id'     => \App\Tag::all()->random(1)->id,
-            'product_id' => \App\Product::whereName('PlayStation 4')->first()->id,
+            'product_id' => \App\Product::whereName('The Fast and the Furious')->first()->id,
+            'created_at' => Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('product_tag')->insert([
+            'tag_id'     => \App\Tag::all()->random(1)->id,
+            'product_id' => \App\Product::whereName('The Fast and the Furious: Tokyo Drift')->first()->id,
             'created_at' => Carbon::now()->toDateTimeString(),
         ]);
     }
