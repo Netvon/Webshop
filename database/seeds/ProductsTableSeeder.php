@@ -86,7 +86,7 @@ class ProductsTableSeeder extends Seeder
             'is_in_stock'       => false,
             'description_long'  => 'Long',
             'description_short' => 'Short',
-            'category_id'       => 5,
+            'category_id'       => $sony,
             'created_at'        => Carbon::now()->toDateTimeString(),
             'slug'              => str_slug('PlayStation'),
         ]);
