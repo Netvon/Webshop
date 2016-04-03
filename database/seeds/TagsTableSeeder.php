@@ -42,8 +42,8 @@ class TagsTableSeeder extends Seeder
             'created_at' => Carbon::now()->toDateTimeString(),
         ]);
 
-        factory(\App\Tag::class, 20)
-            ->create();
+//        factory(\App\Tag::class, 20)
+//            ->create();
 
         \App\Tag::each(function (\App\Tag $tag) {
             $tag->sluggify();
