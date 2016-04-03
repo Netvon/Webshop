@@ -40,6 +40,6 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Tag::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->unique()->colorName,
+        'name' => $faker->unique()->word,
     ];
 });
