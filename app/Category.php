@@ -71,4 +71,33 @@ class Category extends Model implements SluggableInterface
     {
         $query->where('parent_id', null);
     }
+
+    public function product_count_with_children()
+    {
+        $p_count = 0;
+        $this->pcwc_rec($p_count, $this->id);
+
+        return $p_count;
+    }
+
+
+    /**
+     * @param int $p_count
+     * @param int $child_id
+     */
+    private function pcwc_rec(&$p_count, $child_id)
+    {
+        /** @var \App\Category $cat */
+        $cat = \App\Category::findBySlugOrId($child_id);
+
+        $p_count += $cat->products->count();
+
+        if($cat->children->count() > 0)
+        {
+            foreach($cat->children as $c)
+            {
+                $this->pcwc_rec($p_count, $c->id);
+            }
+        }
+    }
 }

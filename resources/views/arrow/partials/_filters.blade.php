@@ -46,7 +46,7 @@
                                 <li>
                             @endif
                                     <a href="{{ URL::action('CategoryController@show', $c->slug) }}">{{ $c->name }}
-                                        <span class="badge pull-right">{{ $c->products->count() }}</span>
+                                        <span class="badge pull-right">{{ $c->product_count_with_children() }}</span>
                                     </a>
 
                                     <ul>
