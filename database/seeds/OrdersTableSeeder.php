@@ -21,19 +21,5 @@ class OrdersTableSeeder extends Seeder
             'price'               => 0,
             'created_at'          => Carbon::now()->toDateTimeString(),
         ]);
-
-        $forOrder = \App\Order::first()->id;
-
-        $products = \App\Product::all()->random(4);
-
-        foreach($products as $product)
-        {
-            DB::table('order_product')->insert([
-                'order_id'   => $forOrder,
-                'product_id' => $product->id,
-                'quantity'   => random_int(1, 10),
-                'created_at' => Carbon::now()->toDateTimeString(),
-            ]);
-        }
     }
 }

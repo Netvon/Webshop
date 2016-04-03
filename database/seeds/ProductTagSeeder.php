@@ -26,7 +26,7 @@ class ProductTagSeeder extends Seeder
 
         DB::table('product_tag')->insert([
             'tag_id'     => \App\Tag::all()->random(1)->id,
-            'product_id' => \App\Product::whereName('PlayStation')->first()->id,
+            'product_id' => \App\Product::whereName('PlayStation 1')->first()->id,
             'created_at' => Carbon::now()->toDateTimeString(),
         ]);
 
