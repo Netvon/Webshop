@@ -37,3 +37,9 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
         'category_id' => 1,
     ];
 });
+
+$factory->define(App\Tag::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->unique()->colorName,
+    ];
+});

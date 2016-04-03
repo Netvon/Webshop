@@ -12,33 +12,28 @@ class OrdersTableSeeder extends Seeder
      */
     public function run()
     {
+        $forUser = \App\User::first()->id;
+
         DB::table('orders')->insert([
-            'user_id' => 1,
+            'user_id'             => $forUser,
             'is_payment_complete' => false,
-            'discount' => 0,
-            'price' => 0,
-            'created_at' => Carbon::now()->toDateTimeString(),
+            'discount'            => 0,
+            'price'               => 0,
+            'created_at'          => Carbon::now()->toDateTimeString(),
         ]);
 
-        DB::table('order_product')->insert([
-            'order_id' => 1,
-            'product_id' => 1,
-            'quantity' => 2,
-            'created_at' => Carbon::now()->toDateTimeString(),
-        ]);
+        $forOrder = \App\Order::first()->id;
 
-        DB::table('order_product')->insert([
-            'order_id' => 1,
-            'product_id' => 3,
-            'quantity' => 4,
-            'created_at' => Carbon::now()->toDateTimeString(),
-        ]);
+        $products = \App\Product::all()->random(4);
 
-        DB::table('order_product')->insert([
-            'order_id' => 1,
-            'product_id' => 7,
-            'quantity' => 1,
-            'created_at' => Carbon::now()->toDateTimeString(),
-        ]);
+        foreach($products as $product)
+        {
+            DB::table('order_product')->insert([
+                'order_id'   => $forOrder,
+                'product_id' => $product->id,
+                'quantity'   => random_int(1, 10),
+                'created_at' => Carbon::now()->toDateTimeString(),
+            ]);
+        }
     }
 }

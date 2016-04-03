@@ -13,39 +13,41 @@ class TagsTableSeeder extends Seeder
     public function run()
     {
         DB::table('tags')->insert([
-            'name' => 'rood',
+            'name' => 'red',
             'created_at' => Carbon::now()->toDateTimeString(),
-            'slug' => 'rood',
         ]);
 
         DB::table('tags')->insert([
-            'name' => 'zwart',
+            'name' => 'black',
             'created_at' => Carbon::now()->toDateTimeString(),
-            'slug' => 'rood',
         ]);
 
         DB::table('tags')->insert([
-            'name' => 'geel',
+            'name' => 'yellow',
             'created_at' => Carbon::now()->toDateTimeString(),
-            'slug' => 'rood',
         ]);
 
         DB::table('tags')->insert([
-            'name' => 'blauw',
+            'name' => 'blue',
             'created_at' => Carbon::now()->toDateTimeString(),
-            'slug' => 'blauw',
         ]);
 
         DB::table('tags')->insert([
-            'name' => 'wit',
+            'name' => 'white',
             'created_at' => Carbon::now()->toDateTimeString(),
-            'slug' => 'wit',
         ]);
 
         DB::table('tags')->insert([
-            'name' => 'groen',
+            'name' => 'green',
             'created_at' => Carbon::now()->toDateTimeString(),
-            'slug' => 'groen',
         ]);
+
+        factory(\App\Tag::class, 20)
+            ->create();
+
+        \App\Tag::each(function (\App\Tag $tag) {
+            $tag->sluggify();
+            $tag->save();
+        });
     }
 }
